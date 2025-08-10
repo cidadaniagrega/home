@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Assessoria Cidadania Grega - Planos e Agendamento</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0; padding: 0;
+    background: #f9fafb;
+    color: #333;
+    line-height: 1.5;
+  }
+  header {
+    background-color: #004d7a;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  header h1 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 2rem;
+  }
+  .banner {
+    position: relative;
+    width: 100%;
+    max-height: 450px;
+    overflow: hidden;
+    background: #000;
+  }
+  .banner video {
+    width: 100%;
+    height: auto;
+    max-height: 450px;
+    object-fit: cover;
+    display: block;
+  }
+  main {
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 0 20px 60px;
+  }
+  .info-section {
+    background-color: #e1f0fb;
+    border: 2px solid #004d7a;
+    border-radius: 10px;
+    padding: 25px 30px;
+    margin-bottom: 40px;
+    color: #004d7a;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 12px rgb(0 77 122 / 0.15);
+  }
+  .info-section strong {
+    color: #002d4a;
+  }
+  h2 {
+    color: #004d7a;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #004d7a;
+    padding-bottom: 8px;
+  }
+  .plans {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .plan {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    flex: 1 1 300px;
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .plan h3 {
+    margin-top: 0;
+    color: #007acc;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+  .price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #004d7a;
+    margin-bottom: 10px;
+  }
+  .original-price {
+    font-size: 1.2rem;
+    color: #999;
+    text-decoration: line-through;
+    margin-bottom: 5px;
+  }
+  .installments {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 15px;
+  }
+  .summary {
+    font-size: 1rem;
+    margin-bottom: 25px;
+    flex-grow: 1;
+  }
+  .buttons {
+    width: 100%;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+  .btn {
+    background-color: #007acc;
+    color: white;
+    padding: 14px 25px;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    font-weight: 600;
+    flex: 1;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    border: none;
+  }
+  .btn:hover {
+    background-color: #005fa3;
+  }
+  .btn.agendar {
+    background-color: #22a55f;
+  }
+  .btn.agendar:hover {
+    background-color: #16663b;
+  }
+  footer {
+    text-align: center;
+    color: #777;
+    padding: 20px 10px;
+    border-top: 1px solid #ddd;
+    font-size: 0.9rem;
+  }
+  /* Modal styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+  }
+  .modal-content {
+    background-color: #fff;
+    margin: 8% auto;
+    padding: 25px 30px;
+    border-radius: 8px;
+    max-width: 700px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .modal-header h3 {
+    margin: 0;
+    color: #004d7a;
+  }
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  .close-btn:hover {
+    color: #333;
+  }
+  .modal-body p {
+    margin-bottom: 15px;
+  }
+  @media (max-width: 720px) {
+    .plans {
+      flex-direction: column;
+      align-items: center;
+    }
+    .buttons {
+      flex-direction: column;
+    }
+    .btn {
+      flex: none;
+      width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Assessoria para Cidadania Grega para descendentes</h1>
+</header>
+
+<div class="banner">
+  <!--<video autoplay muted loop playsinline>
+    <source src="https://cdn.pixabay.com/vimeo/239253657/Still%20Life%20-%2015596.mp4" type="video/mp4" />
+    Seu navegador não suporta vídeo.
+  </video>-->
+  <img src="banner.jpg" 
+       alt="Informações de contato" 
+       style="max-width: 500px; display: block; margin: 0 auto;">
+</div>
+
+<main>
+
+  <section class="about-me" aria-label="Sobre Emmanuel e o processo de cidadania grega" style="
+  max-width: 90%;
+  margin: 0 auto 60px;
+  padding: 30px 40px;
+  background: #fefefe;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 0.1);
+  color: #2c3e50;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  ">
+  <h2 style="
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #34495e;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 12px;
+    font-size: 2rem;
+  ">
+    Da Jornada Pessoal à assessoria que Transforma Sonhos em Cidadania Grega
+  </h2>
+  <p style="margin-bottom: 22px;">
+    Sou Emmanuel Kiametis, neto de avós gregos que deixaram sua terra natal na década de 1950 para construir uma nova vida no Brasil.  
+    Sempre carreguei o desejo profundo de <strong style="color:#3498db;">resgatar minhas raízes</strong> e garantir o direito de ser reconhecido oficialmente como cidadão grego.  
+    Porém, por muito tempo, essa jornada parecia distante e cheia de obstáculos.
+  </p>
+  <p style="margin-bottom: 22px;">
+    Enfrentei anos de desafios burocráticos, ligações, filas e inúmeras tentativas frustradas nos consulados e embaixadas.  
+    Apesar da receptividade dos profissionais, percebi que o sistema exige que o candidato esteja totalmente preparado —  
+    com conhecimento detalhado e toda documentação em mãos — para avançar.
+  </p>
+  <p style="margin-bottom: 22px;">
+    Em 2024, decidi dar um passo decisivo: encontrei o caminho certo, o método que transformou minha busca em sucesso.  
+    Em apenas <strong style="color:#3498db;">7 meses</strong>, conquistei minha cidadania grega, um processo que antes parecia interminável.
+  </p>
+  <p style="margin-bottom: 22px;">
+    Meu pai, filho legítimo dos meus avós, nunca havia feito o registro como cidadão grego.  
+    Eu descobri como regularizar essa situação e imediatamente iniciei meu processo, junto com o de meus dois filhos —  
+    tudo isso em tempo recorde.
+  </p>
+  <p>
+    Hoje, sinto uma enorme satisfação em honrar o legado da minha família,  
+    garantindo que eu, meu pai e meus filhos sigamos como cidadãos europeus — e, acima de tudo, como legítimos gregos.  
+    Quero ajudar você a viver essa mesma conquista.
+  </p>
+</section>
+
+
+  <section class="info-section" aria-label="Descendentes gregos no Brasil">
+    <h2 style="text-align:center; color:#003559; font-weight:700; margin-bottom:15px;">
+      Você Sabia? Mais de 100 mil Brasileiros Podem Ter Direito à Cidadania Grega!
+    </h2>
+    <p>
+      Estima-se que cerca de <strong>30 a 50 mil imigrantes gregos</strong> tenham chegado ao Brasil entre o final do século XIX e meados do século XX.
+      Atualmente, existem aproximadamente <strong>100 a 200 mil brasileiros</strong> que possuem algum grau de descendência grega e podem ter direito à cidadania grega por descendência, considerando filhos, netos e bisnetos de gregos natos.
+    </p>
+  </section>
+
+  <section class="info-section" aria-label="Benefícios da cidadania grega">
+    <h2 style="text-align:center; color:#003559; font-weight:700; margin-bottom:15px;">
+      Por Que Adquirir a Cidadania Grega? Conheça os Benefícios Exclusivos!
+    </h2>
+    <ul>
+      <li><strong>Cidadania Europeia:</strong> Direito de morar, trabalhar e estudar em qualquer país da União Europeia.</li>
+      <li><strong>Passaporte Forte:</strong> Facilita viagens para diversos países, como EUA, Canadá e Austrália.</li>
+      <li><strong>Estudos:</strong> Acesso a universidades europeias com custos reduzidos e bolsas.</li>
+      <li><strong>Oportunidades Profissionais:</strong> Trabalhe e abra negócios em toda a Europa legalmente.</li>
+      <li><strong>Benefícios Sociais:</strong> Acesso aos sistemas de saúde e previdência europeus.</li>
+      <li><strong>Direitos Políticos:</strong> Vote e participe das eleições na Grécia e UE.</li>
+      <li><strong>Conexão Cultural:</strong> Resgate suas raízes e mantenha contato com a comunidade grega.</li>
+    </ul>
+  </section>
+
+  <h2>Escolha seu plano</h2>
+
+  <div class="plans">
+
+    <div class="plan">
+      <h3>Assessoria Inicial</h3>
+      <div class="original-price">De 80,00€</div>
+      <div class="price">Por 50,00€</div>
+      <div class="installments">Pagamento via Paypal no ato do agendamento</div>
+      <div class="summary">
+        Análise personalizada da sua elegibilidade, identificação de documentos e orientações para iniciar seu processo.
+      </div>
+      <div class="buttons">
+        <button class="btn" data-modal="modal-assessoria">Detalhes</button>
+        <a href="https://calendly.com/seu-usuario" target="_blank" class="btn agendar" rel="noopener noreferrer">Agendar</a>
+      </div>
+    </div>
+
+    <div class="plan">
+      <h3>Assessoria Completa</h3>
+      <div class="original-price">De 800,00€</div>
+      <div class="price">Por 500,00€</div>
+      <div class="installments">Pagamento via Paypal no ato do agendamento</div>
+      <div class="summary">
+        Suporte completo até o protocolo no consulado, recomendação de traduções juramentadas e 1 hora de assessoria mensal.
+      </div>
+      <div class="buttons">
+        <button class="btn" data-modal="modal-completa">Detalhes</button>
+        <a href="https://calendly.com/seu-usuario" target="_blank" class="btn agendar" rel="noopener noreferrer">Agendar</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Modal Assessoria Inicial -->
+<div id="modal-assessoria" class="modal" role="dialog" aria-modal="true" aria-labelledby="assessoria-title">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="assessoria-title">Detalhes da Assessoria Inicial</h3>
+      <button class="close-btn" aria-label="Fechar modal">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p>A Assessoria Inicial é uma análise personalizada onde avaliamos sua elegibilidade para a cidadania grega por descendência. Durante essa etapa, você receberá:</p>
+      <ul>
+        <li>Avaliação do seu caso com base na documentação que você já possui (certidões, registros familiares, etc).</li>
+        <li>Identificação dos documentos faltantes e orientações claras sobre como obtê-los.</li>
+        <li>Explicação detalhada do passo a passo do processo de reconhecimento da cidadania.</li>
+        <li>Resposta às suas dúvidas principais sobre prazos, custos e requisitos legais.</li>
+      </ul>
+      <p>Este serviço é ideal para quem está começando e quer entender as possibilidades reais para seu caso.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Assessoria Completa -->
+<div id="modal-completa" class="modal" role="dialog" aria-modal="true" aria-labelledby="completa-title">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="completa-title">Detalhes da Assesoria Completa</h3>
+      <button class="close-btn" aria-label="Fechar modal">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p>Oferecemos uma assessoria prática e objetiva para ajudar você a iniciar e conduzir o processo de obtenção da cidadania grega por descendência, com suporte essencial para as etapas mais importantes. Nosso foco é garantir que sua documentação esteja correta e que você saiba exatamente o que fazer para apresentar seu pedido ao consulado.</p>
+      <h4>O que está incluído:</h4>
+      <ul>
+        <li>Análise do seu caso e definição dos documentos necessários para a sua situação específica (pais, avós, bisavós, etc).</li>
+        <li>Orientação detalhada sobre como e onde obter certidões, registros, traduções juramentadas e apostilamento, incluindo <strong>recomendação de tradutores juramentados confiáveis</strong>.</li>
+        <li>Checklist completo e personalizado para você acompanhar todas as etapas da preparação documental.</li>
+        <li>Revisão e organização do dossiê documental para garantir que tudo esteja correto antes da entrega no consulado.</li>
+        <li>Suporte para dúvidas durante essa fase inicial, ajudando a resolver questões comuns.</li>
+        <li>Orientação sobre como protocolar o pedido no consulado grego e quais documentos levar.</li>
+        <li><strong>1 hora de assessoria por mês via vídeo</strong>, também suporte via Whatsapp, para esclarecer dúvidas e acompanhar seu progresso, até o final do processo.</li>
+      </ul>
+      <h4>O que <em>não</em> está incluído:</h4>
+      <ul>
+        <li>Não fazemos registro retroativo de ancestrais falecidos ou não registrados na Grécia.</li>
+        <li>Não traduzimos os documentos, mas indicamos tradutores juramentados e melhores caminhos caso a caso.</li>
+        <li>Não fazemos representação física ou virtual do cliente, é importante ressaltar que todos os passos do processo no consulado devem ser feitos pelo solicitante.</li>
+      </ul>
+      <h4>Benefícios para você:</h4>
+      <ul>
+        <li>Custo mais acessível para quem quer iniciar a cidadania com segurança.</li>
+        <li>Autonomia para conduzir o processo no consulado, com apoio profissional nas etapas iniciais.</li>
+        <li>Orientação clara e prática para evitar erros comuns e atrasos.</li>
+        <li>Suporte regular para que você nunca fique sem resposta em dúvidas importantes durante o processo.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <img src="contato.png" 
+       alt="Informações de contato" 
+       style="max-width: 400px; display: block; margin: 0 auto;">
+  <p>© 2025 Assessoria Cidadania Grega - Todos os direitos reservados</p>
+</footer>
+
+<script>
+  // Função para abrir modal
+  function openModal(modalId) {
+    document.getElementById(modalId).style.display = 'block';
+  }
+  // Função para fechar modal
+  function closeModal(modal) {
+    modal.style.display = 'none';
+  }
+
+  // Abrir modais ao clicar nos botões "Detalhes"
+  document.querySelectorAll('button[data-modal]').forEach(button => {
+    button.addEventListener('click', () => {
+      openModal(button.getAttribute('data-modal'));
+    });
+  });
+
+  // Fechar modal ao clicar no botão fechar
+  document.querySelectorAll('.close-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      closeModal(btn.closest('.modal'));
+    });
+  });
+
+  // Fechar modal ao clicar fora do conteúdo
+  window.addEventListener('click', (e) => {
+    document.querySelectorAll('.modal').forEach(modal => {
+      if (e.target === modal) {
+        closeModal(modal);
+      }
+    });
+  });
+
+  // Fechar modal com tecla ESC
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal').forEach(modal => {
+        closeModal(modal);
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
