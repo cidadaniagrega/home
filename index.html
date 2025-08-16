@@ -99,7 +99,7 @@
   }
   .installments {
     font-size: 0.9rem;
-    color: #555;
+    color: #007acc;
     margin-bottom: 15px;
   }
   .summary {
@@ -300,17 +300,32 @@
   </section>
   
   <section style="background-color: #f9f9f9; padding: 30px; border-radius: 12px; border: 2px solid #ccc; max-width: 800px; margin: 40px auto; font-family: Arial, sans-serif;">
-  <h2 style="text-align: center; color: #333; margin-bottom: 20px;">📅 Como agendar sua sessão</h2>
-  <ol style="line-height: 1.8; color: #444; font-size: 1.1rem; padding-left: 20px;">
-    <li><strong>Agende o horário</strong> pelo <a href="#planos" style="color: #0077cc; text-decoration: none;">Calendly</a> clicando no link do plano que deseja.</li>
-    <li><strong>Faça o pagamento via Pix</strong> antes do atendimento.</li>
-    <li><strong>Envie um e-mail</strong> para <a href="mailto:contato@cidadaniagrega.com" style="color: #0077cc;">contato@cidadaniagrega.com</a> com o comprovante <strong>até 1 hora antes</strong> do dia e horário escolhido.</li>
-  </ol>
-  
-  <div style="margin-top: 20px; padding: 15px; background-color: #fff8dc; border: 1px dashed #ffa500; border-radius: 8px; text-align: center;">
-    <strong>💳 Chave Pix:</strong> contato@cidadaniagrega.com
-  </div>
-</section>
+	  <h2 style="text-align: center; color: #333; margin-bottom: 20px;">📅 Como agendar sua sessão via PIX <br/> (À vista)</h2>
+	  <ol style="line-height: 1.8; color: #444; font-size: 1.1rem; padding-left: 20px;">
+	    <li><strong>Agende o horário</strong> pelo <a href="#planos" style="color: #0077cc; text-decoration: none;">Calendly</a> clicando no link <b>"Agendar"</b>.</li>
+	    <li><strong>Faça o pagamento via Pix</strong> antes do atendimento.</li>
+	    <li><strong>Envie um e-mail</strong> para <a href="mailto:contato@cidadaniagrega.com" style="color: #0077cc;">contato@cidadaniagrega.com</a> com o comprovante <strong>até 1 hora antes</strong> do dia e horário escolhido.</li>
+	  </ol>
+	  
+	  <div style="margin-top: 20px; padding: 15px; background-color: #fff8dc; border: 1px dashed #ffa500; border-radius: 8px; text-align: center;">
+	    <strong>💳 Chave Pix:</strong> contato@cidadaniagrega.com
+	  </div>
+	  
+	  <h2 style="text-align: center; color: #333; margin-bottom: 20px;">📅 Como agendar sua sessão via PayPal <br/> (Cartão de crédito)</h2>
+	  <ol style="line-height: 1.8; color: #444; font-size: 1.1rem; padding-left: 20px;">
+	    <li><strong>Agende o horário</strong> pelo <a href="#planos" style="color: #0077cc; text-decoration: none;">Calendly</a> clicando no link <b>"Agendar"</b>.</li>
+	    <li><strong>Faça o pagamento via PayPal</strong> clicando no botão abaixo.</li>
+	    <li>Com essa opção <strong>você tem a oportunidade de pagar usando seu cartão de crédito e não precisa enviar comprovante pois recebemos o e-mail automático.</strong></li>
+	  </ol>
+	  
+	  <div style="margin-top: 20px; padding: 15px; background-color: #fff8dc; border: 1px dashed #ffa500; border-radius: 8px; text-align: center;">
+	    <strong>💳 Pague usando o PayPal <a href="#" onclick="openPaypalModal()">clicando aqui</a></strong>
+	  </div>
+	  
+	  <div>
+	     <p<strong>.</strong></p>
+	  </div>
+  </section>
 
   <h2>Escolha seu plano</h2>
 
@@ -320,7 +335,7 @@
       <h3>Assessoria</h3>
       <div class="original-price">De R$ 500,00</div>
       <div class="price">Por R$ 300,00</div>
-      <div class="installments">Pagamento via Pix</div>
+      <div class="installments"><b>Á vista ou com possibilidade de pagar via cartão de crédito via PayPal.</b></div>
       <div class="summary">
         Análise personalizada da sua elegibilidade, identificação de documentos e orientações para iniciar seu processo, bem como tirar quaisquer dúvidas.
       </div>
@@ -352,11 +367,25 @@
     </aside>
 </main>
 
+<!-- Modal escondido -->
+<div id="paypal-modal" 
+     style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); 
+            align-items:center; justify-content:center;">
+  <div style="background:#fff; padding:20px; border-radius:12px; max-width:400px; width:100%; text-align:center; position:relative;">
+    <h3>Finalize seu pagamento</h3>
+    <div id="paypal-button-container"></div>
+    <button onclick="closePaypalModal()" 
+            style="margin-top:15px; padding:8px 14px; border:none; border-radius:8px; background:#0070ba; color:white; cursor:pointer;">
+      Fechar
+    </button>
+  </div>
+</div>
+
 <!-- Modal Assessoria -->
 <div id="modal-assessoria" class="modal" role="dialog" aria-modal="true" aria-labelledby="assessoria-title">
   <div class="modal-content">
     <div class="modal-header">
-      <h3 id="assessoria-title">Detalhes da Assessoria Inicial</h3>
+      <h3 id="assessoria-title">Detalhes da Assessoria</h3>
       <button class="close-btn" aria-label="Fechar modal">&times;</button>
     </div>
     <div class="modal-body">
@@ -467,6 +496,41 @@
       });
     }
   });
+</script>
+
+<script src="https://www.paypal.com/sdk/js?client-id=BAApYVA0191jO-Ei6ScgFroZbVt7jkVPpRlhTgWTTfAcPBXqIVXXeUudUvK-QL868-oVUY5hESrURHQSJQ&currency=BRL"></script>
+
+<script>
+  // Renderiza o botão do PayPal DENTRO do modal
+  paypal.Buttons({
+    style: {
+      color: 'blue',
+      shape: 'pill',
+      label: 'checkout',
+    },
+    createOrder: function (data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: { value: '300.00', currency_code: 'BRL' } // valor em reais
+        }]
+      });
+    },
+    onApprove: function (data, actions) {
+      return actions.order.capture().then(function (details) {
+        alert('Pagamento realizado com sucesso por ' + details.payer.name.given_name);
+        closePaypalModal();
+      });
+    }
+  }).render('#paypal-button-container');
+
+  // Funções para abrir e fechar modal
+  function openPaypalModal() {
+    document.getElementById('paypal-modal').style.display = 'flex';
+  }
+
+  function closePaypalModal() {
+    document.getElementById('paypal-modal').style.display = 'none';
+  }
 </script>
 
 </body>
