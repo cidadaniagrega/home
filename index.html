@@ -235,11 +235,22 @@
          width: 100%;
          }
          }
+         .video-container {
+         display: flex;
+         justify-content: center; /* horizontal center */
+         align-items: center;     /* vertical center */
+         height: 100%;            /* or set a specific height */
+         }
+         .small-video {
+         width: 50%;       /* or any value you want */
+         max-width: 600px; /* keeps it responsive */
+         height: auto;
+         }
       </style>
    </head>
    <body>
       <header>
-         <h1>Cidadania Grega para descendentes</h1>
+         <h1>Cidadania Grega para Descendentes</h1>
          <div class="header-links">
             <div class="link-item">
                <!-- Ícone Instagram -->
@@ -260,13 +271,15 @@
          </div>
       </header>
       <div class="banner">
-         <!--<video autoplay muted loop playsinline>
-            <source src="https://cdn.pixabay.com/vimeo/239253657/Still%20Life%20-%2015596.mp4" type="video/mp4" />
-            Seu navegador não suporta vídeo.
-            </video>-->
-         <img src="banner.jpg" 
+         <div class="video-container">
+            <video controls playsinline class="small-video">
+               <source src="banner.mp4" type="video/mp4" />
+               Seu navegador não suporta vídeo.
+            </video>
+         </div>
+         <!--<img src="banner.jpg" 
             alt="Informações de contato" 
-            style="max-width: 500px; display: block; margin: 0 auto;">
+            style="max-width: 500px; display: block; margin: 0 auto;">-->
       </div>
       <main>
          <section style="
