@@ -1,537 +1,555 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Assessoria Cidadania Grega - Planos e Agendamento</title>
-<style>
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0; padding: 0;
-    background: #f9fafb;
-    color: #333;
-    line-height: 1.5;
-  }
-  header {
-    background-color: #004d7a;
-    color: white;
-    padding: 20px;
-    text-align: center;
-  }
-  header h1 {
-    margin: 0;
-    font-weight: 700;
-    font-size: 2rem;
-  }
-  .banner {
-    position: relative;
-    width: 100%;
-    max-height: 450px;
-    overflow: hidden;
-    background: #000;
-  }
-  .banner video {
-    width: 100%;
-    height: auto;
-    max-height: 450px;
-    object-fit: cover;
-    display: block;
-  }
-  main {
-    max-width: 960px;
-    margin: 40px auto;
-    padding: 0 20px 60px;
-  }
-  .info-section {
-    background-color: #e1f0fb;
-    border: 2px solid #004d7a;
-    border-radius: 10px;
-    padding: 25px 30px;
-    margin-bottom: 40px;
-    color: #004d7a;
-    font-size: 1.1rem;
-    box-shadow: 0 4px 12px rgb(0 77 122 / 0.15);
-  }
-  .info-section strong {
-    color: #002d4a;
-  }
-  h2 {
-    color: #004d7a;
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    border-bottom: 3px solid #004d7a;
-    padding-bottom: 8px;
-  }
-  .plans {
-    display: flex;
-    gap: 30px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .plan {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
-    flex: 1 1 300px;
-    padding: 25px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .plan h3 {
-    margin-top: 0;
-    color: #007acc;
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-  }
-  .price {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #004d7a;
-    margin-bottom: 10px;
-  }
-  .original-price {
-    font-size: 1.2rem;
-    color: #999;
-    text-decoration: line-through;
-    margin-bottom: 5px;
-  }
-  .installments {
-    font-size: 0.9rem;
-    color: #007acc;
-    margin-bottom: 15px;
-  }
-  .summary {
-    font-size: 1rem;
-    margin-bottom: 25px;
-    flex-grow: 1;
-  }
-  .buttons {
-    width: 100%;
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-  }
-  .btn {
-    background-color: #007acc;
-    color: white;
-    padding: 14px 25px;
-    border-radius: 6px;
-    font-size: 1.1rem;
-    text-decoration: none;
-    font-weight: 600;
-    flex: 1;
-    text-align: center;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-    border: none;
-  }
-  .btn:hover {
-    background-color: #005fa3;
-  }
-  .btn.agendar {
-    background-color: #22a55f;
-    max-width: 90%;
-  }
-  .btn.agendar:hover {
-    background-color: #16663b;
-  }
-  footer {
-    text-align: center;
-    color: #777;
-    padding: 20px 10px;
-    border-top: 1px solid #ddd;
-    font-size: 0.9rem;
-  }
-  /* Modal styles */
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.6);
-  }
-  .modal-content {
-    background-color: #fff;
-    margin: 8% auto;
-    padding: 25px 30px;
-    border-radius: 8px;
-    max-width: 700px;
-    max-height: 80vh;
-    overflow-y: auto;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  }
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-  }
-  .modal-header h3 {
-    margin: 0;
-    color: #004d7a;
-  }
-  .close-btn {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #999;
-    cursor: pointer;
-    transition: color 0.3s ease;
-  }
-  .close-btn:hover {
-    color: #333;
-  }
-  .modal-body p {
-    margin-bottom: 15px;
-  }
-  /* ===== Aviso legal ===== */
-  .legal{
-    margin:40px auto 0; padding:18px 20px; font-size:.95rem; color:#555; border-top:1px solid #e6e6e6; max-width:860px
-  }
-  .legal strong{color:#333}
-  @media (max-width: 720px) {
-    .plans {
-      flex-direction: column;
-      align-items: center;
-    }
-    .buttons {
-      flex-direction: column;
-    }
-    .btn {
-      flex: none;
-      width: 100%;
-    }
-  }
-</style>
-</head>
-<body>
-
-<header>
-  <h1>Assessoria para Cidadania Grega para descendentes</h1>
-</header>
-
-<div class="banner">
-  <!--<video autoplay muted loop playsinline>
-    <source src="https://cdn.pixabay.com/vimeo/239253657/Still%20Life%20-%2015596.mp4" type="video/mp4" />
-    Seu navegador não suporta vídeo.
-  </video>-->
-  <img src="banner.jpg" 
-       alt="Informações de contato" 
-       style="max-width: 500px; display: block; margin: 0 auto;">
-</div>
-
-<main>
-
-  <section style="
-  max-width: 90%;
-  margin: 0 auto 60px;
-  padding: 30px 40px;
-  background: #fefefe;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgb(0 0 0 / 0.1);
-  color: #2c3e50;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 1.15rem;
-  line-height: 1.7;
-  ">
-  <h2 style="
-    text-align: center;
-    font-weight: 700;
-    margin-bottom: 30px;
-    color: #34495e;
-    border-bottom: 3px solid #3498db;
-    padding-bottom: 12px;
-    font-size: 2rem;
-  ">
-      Descubra o Caminho para Reconectar-se às Suas Raízes Gregas
-    </h2>
-    <p style="color: #333; font-size: 18px; margin-bottom: 20px; text-align: justify;">
-      Muitas famílias ao redor do mundo carregam um legado cultural e histórico profundo ligado à Grécia. 
-      Para aqueles que desejam transformar esse vínculo em um reconhecimento oficial, compreender o processo 
-      de cidadania grega é um passo fundamental. Cada etapa exige atenção a detalhes, conhecimento de exigências 
-      documentais e compreensão de prazos e trâmites. Com uma abordagem bem estruturada, é possível avançar de forma 
-      mais confiante e estratégica, evitando erros que possam atrasar ou comprometer o andamento.
-    </p>
-    <p style="color: #333; font-size: 18px; margin-bottom: 20px; text-align: justify;">
-      O processo de solicitação de cidadania grega pode variar conforme a história e os documentos de cada família, 
-      mas há pontos em comum que merecem atenção especial: comprovação de descendência, tradução e validação oficial 
-      de certidões, e apresentação correta junto às autoridades competentes. Uma preparação adequada e alinhada aos 
-      critérios oficiais torna o caminho mais claro e aumenta as chances de um processo bem conduzido, dentro do 
-      que a legislação permite.
-    </p>
-    <p style="color: #333; font-size: 18px; margin-bottom: 0; text-align: justify;">
-      Por isso, contar com orientações claras e atualizadas é essencial para que cada solicitante compreenda os 
-      passos, se organize e tome decisões assertivas em cada fase. Informações confiáveis e planejamento estratégico 
-      são diferenciais que podem facilitar a jornada de quem busca o reconhecimento de sua cidadania grega, 
-      preservando um direito que, além de legal, representa também uma herança cultural valiosa.
-    </p>
-</section>
-
-
-
-  <section class="info-section" aria-label="Descendentes gregos no Brasil">
-    <h2 style="text-align:center; color:#003559; font-weight:700; margin-bottom:15px;">
-      Você Sabia? Mais de 100 mil Brasileiros Podem Ter Direito à Cidadania Grega!
-    </h2>
-    <p>
-      Estima-se que cerca de <strong>30 a 50 mil imigrantes gregos</strong> tenham chegado ao Brasil entre o final do século XIX e meados do século XX.
-      Atualmente, existem aproximadamente <strong>100 a 200 mil brasileiros</strong> que possuem algum grau de descendência grega e podem ter direito à cidadania grega por descendência, considerando filhos, netos e bisnetos de gregos natos.
-    </p>
-  </section>
-
-  <section class="info-section" aria-label="Benefícios da cidadania grega">
-    <h2 style="text-align:center; color:#003559; font-weight:700; margin-bottom:15px;">
-      Por Que Adquirir a Cidadania Grega? Conheça os Benefícios Exclusivos!
-    </h2>
-    <ul>
-      <li><strong>Cidadania Europeia:</strong> Direito de morar, trabalhar e estudar em qualquer país da União Europeia.</li>
-      <li><strong>Passaporte Forte:</strong> Facilita viagens para diversos países, como EUA, Canadá e Austrália.</li>
-      <li><strong>Estudos:</strong> Acesso a universidades europeias com custos reduzidos e bolsas.</li>
-      <li><strong>Oportunidades Profissionais:</strong> Trabalhe e abra negócios em toda a Europa legalmente.</li>
-      <li><strong>Benefícios Sociais:</strong> Acesso aos sistemas de saúde e previdência europeus.</li>
-      <li><strong>Direitos Políticos:</strong> Vote e participe das eleições na Grécia e UE.</li>
-      <li><strong>Conexão Cultural:</strong> Resgate suas raízes e mantenha contato com a comunidade grega.</li>
-    </ul>
-  </section>
-  
-  <section style="background-color: #f9f9f9; padding: 30px; border-radius: 12px; border: 2px solid #ccc; max-width: 800px; margin: 40px auto; font-family: Arial, sans-serif;">
-	  <h2 style="text-align: center; color: #333; margin-bottom: 20px;">📅 Como agendar sua sessão via PIX <br/> (À vista)</h2>
-	  <ol style="line-height: 1.8; color: #444; font-size: 1.1rem; padding-left: 20px;">
-	    <li><strong>Agende o horário</strong> pelo <a href="#planos" style="color: #0077cc; text-decoration: none;">Calendly</a> clicando no link <b>"Agendar"</b>.</li>
-	    <li><strong>Faça o pagamento via Pix</strong> antes do atendimento.</li>
-	    <li><strong>Envie um e-mail</strong> para <a href="mailto:contato@cidadaniagrega.com" style="color: #0077cc;">contato@cidadaniagrega.com</a> com o comprovante <strong>até 1 hora antes</strong> do dia e horário escolhido.</li>
-	  </ol>
-	  
-	  <div style="margin-top: 20px; padding: 15px; background-color: #fff8dc; border: 1px dashed #ffa500; border-radius: 8px; text-align: center;">
-	    <strong>💳 Chave Pix:</strong> contato@cidadaniagrega.com
-	  </div>
-	  
-	  <h2 style="text-align: center; color: #333; margin-bottom: 20px;">📅 Como agendar sua sessão via PayPal <br/> (Cartão de crédito)</h2>
-	  <ol style="line-height: 1.8; color: #444; font-size: 1.1rem; padding-left: 20px;">
-	    <li><strong>Agende o horário</strong> pelo <a href="#planos" style="color: #0077cc; text-decoration: none;">Calendly</a> clicando no link <b>"Agendar"</b>.</li>
-	    <li><strong>Faça o pagamento via PayPal</strong> clicando no botão abaixo.</li>
-	    <li>Com essa opção <strong>você tem a oportunidade de pagar usando seu cartão de crédito e não precisa enviar comprovante pois recebemos o e-mail automático.</strong></li>
-	  </ol>
-	  
-	  <div style="margin-top: 20px; padding: 15px; background-color: #fff8dc; border: 1px dashed #ffa500; border-radius: 8px; text-align: center;">
-	    <strong>💳 Pague usando o PayPal <a href="#" onclick="openPaypalModal()">clicando aqui</a></strong>
-	  </div>
-	  
-	  <div>
-	     <p<strong>.</strong></p>
-	  </div>
-  </section>
-
-  <h2>Escolha seu plano</h2>
-
-  <div id="planos" class="plans">
-
-    <div class="plan">
-      <h3>Assessoria</h3>
-      <div class="original-price">De R$ 500,00</div>
-      <div class="price">Por R$ 300,00</div>
-      <div class="installments"><b>Á vista ou com possibilidade de pagar via cartão de crédito via PayPal.</b></div>
-      <div class="summary">
-        Análise personalizada da sua elegibilidade, identificação de documentos e orientações para iniciar seu processo, bem como tirar quaisquer dúvidas.
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Assessoria Cidadania Grega - Planos e Agendamento</title>
+      <style>
+         body {
+         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+         margin: 0; padding: 0;
+         background: #f9fafb;
+         color: #333;
+         line-height: 1.5;
+         }
+         header {
+         background-color: #004d7a;
+         color: white;
+         padding: 20px;
+         text-align: center;
+         position: relative; /* para posicionar os links */
+         }
+         .header-links {
+         position: absolute;
+         top: 50%;
+         right: 20px;
+         transform: translateY(-50%);
+         display: flex;
+         flex-direction: column; /* vertical */
+         gap: 5px;
+         font-size: 0.95rem;
+         text-align: left;
+         }
+         .header-links a {
+         color: #fff;
+         text-decoration: none;
+         font-weight: 600;
+         transition: color 0.3s ease;
+         }
+         .header-links a:hover {
+         color: #ffd700;
+         }
+         .header-links .icon {
+         width: 14px;
+         height: 14px;
+         }
+         @media (max-width: 1280px) {
+         .header-links {
+         position: static;
+         transform: none;
+         text-align: center;
+         margin-top: 10px;
+         }
+         }
+         .banner {
+         position: relative;
+         width: 100%;
+         max-height: 450px;
+         overflow: hidden;
+         background: #000;
+         }
+         .banner video {
+         width: 100%;
+         height: auto;
+         max-height: 450px;
+         object-fit: cover;
+         display: block;
+         }
+         main {
+         max-width: 960px;
+         margin: 40px auto;
+         padding: 0 20px 60px;
+         }
+         .info-section {
+         background-color: #e1f0fb;
+         border: 2px solid #004d7a;
+         border-radius: 10px;
+         padding: 25px 30px;
+         margin-bottom: 40px;
+         color: #004d7a;
+         font-size: 1.1rem;
+         box-shadow: 0 4px 12px rgb(0 77 122 / 0.15);
+         }
+         .info-section strong {
+         color: #002d4a;
+         }
+         h2 {
+         color: #004d7a;
+         font-size: 1.8rem;
+         margin-bottom: 20px;
+         border-bottom: 3px solid #004d7a;
+         padding-bottom: 8px;
+         }
+         .plans {
+         display: flex;
+         gap: 30px;
+         flex-wrap: wrap;
+         justify-content: center;
+         }
+         .plan {
+         background: white;
+         border-radius: 10px;
+         box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+         flex: 1 1 300px;
+         padding: 25px 20px;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         text-align: center;
+         }
+         .plan h3 {
+         margin-top: 0;
+         color: #007acc;
+         font-size: 1.5rem;
+         margin-bottom: 15px;
+         }
+         .price {
+         font-size: 2rem;
+         font-weight: 700;
+         color: #004d7a;
+         margin-bottom: 10px;
+         }
+         .original-price {
+         font-size: 1.2rem;
+         color: #999;
+         text-decoration: line-through;
+         margin-bottom: 5px;
+         }
+         .installments {
+         font-size: 0.9rem;
+         color: #007acc;
+         margin-bottom: 15px;
+         }
+         .summary {
+         font-size: 1rem;
+         margin-bottom: 25px;
+         flex-grow: 1;
+         }
+         .buttons {
+         width: 100%;
+         display: flex;
+         gap: 12px;
+         justify-content: center;
+         }
+         .btn {
+         background-color: #007acc;
+         color: white;
+         padding: 14px 25px;
+         border-radius: 6px;
+         font-size: 1.1rem;
+         text-decoration: none;
+         font-weight: 600;
+         flex: 1;
+         text-align: center;
+         transition: background-color 0.3s ease;
+         cursor: pointer;
+         border: none;
+         }
+         .btn:hover {
+         background-color: #005fa3;
+         }
+         .btn.agendar {
+         background-color: #22a55f;
+         max-width: 90%;
+         }
+         .btn.agendar:hover {
+         background-color: #16663b;
+         }
+         footer {
+         text-align: center;
+         color: #777;
+         padding: 20px 10px;
+         border-top: 1px solid #ddd;
+         font-size: 0.9rem;
+         }
+         /* Modal styles */
+         .modal {
+         display: none;
+         position: fixed;
+         z-index: 1000;
+         left: 0; top: 0;
+         width: 100%; height: 100%;
+         overflow: auto;
+         background-color: rgba(0,0,0,0.6);
+         }
+         .modal-content {
+         background-color: #fff;
+         margin: 8% auto;
+         padding: 25px 30px;
+         border-radius: 8px;
+         max-width: 700px;
+         max-height: 80vh;
+         overflow-y: auto;
+         box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+         }
+         .modal-header {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         margin-bottom: 15px;
+         }
+         .modal-header h3 {
+         margin: 0;
+         color: #004d7a;
+         }
+         .close-btn {
+         background: none;
+         border: none;
+         font-size: 1.5rem;
+         font-weight: 700;
+         color: #999;
+         cursor: pointer;
+         transition: color 0.3s ease;
+         }
+         .close-btn:hover {
+         color: #333;
+         }
+         .modal-body p {
+         margin-bottom: 15px;
+         }
+         /* ===== Aviso legal ===== */
+         .legal{
+         margin:40px auto 0; padding:18px 20px; font-size:.95rem; color:#555; border-top:1px solid #e6e6e6; max-width:860px
+         }
+         .legal strong{color:#333}
+         @media (max-width: 720px) {
+         .plans {
+         flex-direction: column;
+         align-items: center;
+         }
+         .buttons {
+         flex-direction: column;
+         }
+         .btn {
+         flex: none;
+         width: 100%;
+         }
+         }
+      </style>
+   </head>
+   <body>
+      <header>
+         <h1>Cidadania Grega para descendentes</h1>
+         <div class="header-links">
+            <div class="link-item">
+               <!-- Ícone Instagram -->
+               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
+                  <path fill="white" d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.346 3.608 1.322.975.976 1.26 2.243 1.322 3.608.058 1.266.07 1.645.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.346 2.633-1.322 3.608-.976.975-2.243 1.26-3.608 1.322-1.266.058-1.645.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.346-3.608-1.322-.975-.976-1.26-2.243-1.322-3.608C2.175 15.747 2.163 15.368 2.163 12s.012-3.584.07-4.85c.062-1.366.346-2.633 1.322-3.608.976-.975 2.243-1.26 3.608-1.322C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.013 7.052.072 5.771.13 4.632.443 3.678 1.398c-.954.954-1.267 2.093-1.325 3.374C2.013 5.668 2 6.077 2 9.335v5.33c0 3.259.013 3.668.072 4.948.058 1.281.371 2.42 1.325 3.374.954.954 2.093 1.267 3.374 1.325 1.28.059 1.689.072 4.948.072s3.668-.013 4.948-.072c1.281-.058 2.42-.371 3.374-1.325.954-.954 1.267-2.093 1.325-3.374.059-1.28.072-1.689.072-4.948v-5.33c0-3.259-.013-3.668-.072-4.948-.058-1.281-.371-2.42-1.325-3.374-.954-.954-2.093-1.267-3.374-1.325C15.668.013 15.259 0 12 0z"/>
+                  <path fill="white" d="M12 5.838A6.162 6.162 0 1 0 18.162 12 6.162 6.162 0 0 0 12 5.838zm0 10.162A4 4 0 1 1 16 12a4 4 0 0 1-4 4z"/>
+                  <circle fill="white" cx="18.406" cy="5.594" r="1.44"/>
+               </svg>
+               <a href="https://www.instagram.com/cidadania.grega" target="_blank" rel="noopener noreferrer">cidadania.grega</a>
+            </div>
+            <div class="link-item">
+               <!-- Ícone Email -->
+               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
+                  <path fill="white" d="M12 12.713l-11.715-7.713h23.43L12 12.713zm-12-1.008v10.295h24V11.705l-12 7.994-12-7.994z"/>
+               </svg>
+               <a href="mailto:contato@cidadaniagrega.com">contato@cidadaniagrega.com</a>
+            </div>
+         </div>
+      </header>
+      <div class="banner">
+         <!--<video autoplay muted loop playsinline>
+            <source src="https://cdn.pixabay.com/vimeo/239253657/Still%20Life%20-%2015596.mp4" type="video/mp4" />
+            Seu navegador não suporta vídeo.
+            </video>-->
+         <img src="banner.jpg" 
+            alt="Informações de contato" 
+            style="max-width: 500px; display: block; margin: 0 auto;">
       </div>
-      <div class="buttons">
-        <button class="btn" data-modal="modal-assessoria">Detalhes</button>
-        <a href="https://calendly.com/cidadaniagrega/passo-a-passo" target="_blank" class="btn agendar" rel="noopener noreferrer">Agendar</a>
+      <main>
+         <section style="
+            max-width: 90%;
+            margin: 0 auto 60px;
+            padding: 30px 40px;
+            background: #fefefe;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgb(0 0 0 / 0.1);
+            color: #2c3e50;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 1.15rem;
+            line-height: 1.7;
+            ">
+            <h2 style="
+               text-align: center;
+               font-weight: 700;
+               margin-bottom: 30px;
+               color: #34495e;
+               border-bottom: 3px solid #3498db;
+               padding-bottom: 12px;
+               font-size: 2rem;
+               ">
+               Descubra o Caminho para Reconectar-se às Suas Raízes Gregas
+            </h2>
+            <p style="color: #333; font-size: 18px; margin-bottom: 20px; text-align: justify;">
+               Muitas famílias ao redor do mundo carregam um legado cultural e histórico profundo ligado à Grécia. 
+               Para aqueles que desejam transformar esse vínculo em um reconhecimento oficial, compreender o processo 
+               de cidadania grega é um passo fundamental. Cada etapa exige atenção a detalhes, conhecimento de exigências 
+               documentais e compreensão de prazos e trâmites. Com uma abordagem bem estruturada, é possível avançar de forma 
+               mais confiante e estratégica, evitando erros que possam atrasar ou comprometer o andamento.
+            </p>
+            <p style="color: #333; font-size: 18px; margin-bottom: 20px; text-align: justify;">
+               O processo de solicitação de cidadania grega pode variar conforme a história e os documentos de cada família, 
+               mas há pontos em comum que merecem atenção especial: comprovação de descendência, tradução e validação oficial 
+               de certidões, e apresentação correta junto às autoridades competentes. Uma preparação adequada e alinhada aos 
+               critérios oficiais torna o caminho mais claro e aumenta as chances de um processo bem conduzido, dentro do 
+               que a legislação permite.
+            </p>
+            <p style="color: #333; font-size: 18px; margin-bottom: 0; text-align: justify;">
+               Por isso, contar com orientações claras e atualizadas é essencial para que cada solicitante compreenda os 
+               passos, se organize e tome decisões assertivas em cada fase. Informações confiáveis e planejamento estratégico 
+               são diferenciais que podem facilitar a jornada de quem busca o reconhecimento de sua cidadania grega, 
+               preservando um direito que, além de legal, representa também uma herança cultural valiosa.
+            </p>
+         </section>
+         <section class="info-section" aria-label="Descendentes gregos no Brasil">
+            <h2 style="text-align:center; color:#003559; font-weight:700; margin-bottom:15px;">
+               Você Sabia? Mais de 100 mil Brasileiros Podem Ter Direito à Cidadania Grega!
+            </h2>
+            <p>
+               Estima-se que cerca de <strong>30 a 50 mil imigrantes gregos</strong> tenham chegado ao Brasil entre o final do século XIX e meados do século XX.
+               Atualmente, existem aproximadamente <strong>100 a 200 mil brasileiros</strong> que possuem algum grau de descendência grega e podem ter direito à cidadania grega por descendência, considerando filhos, netos e bisnetos de gregos natos.
+            </p>
+         </section>
+         <section class="info-section" aria-label="Benefícios da cidadania grega">
+            <h2 style="text-align:center; color:#003559; font-weight:700; margin-bottom:15px;">
+               Por Que Adquirir a Cidadania Grega? Conheça os Benefícios Exclusivos!
+            </h2>
+            <ul>
+               <li><strong>Cidadania Europeia:</strong> Direito de morar, trabalhar e estudar em qualquer país da União Europeia.</li>
+               <li><strong>Passaporte Forte:</strong> Facilita viagens para diversos países, como EUA, Canadá e Austrália.</li>
+               <li><strong>Estudos:</strong> Acesso a universidades europeias com custos reduzidos e bolsas.</li>
+               <li><strong>Oportunidades Profissionais:</strong> Trabalhe e abra negócios em toda a Europa legalmente.</li>
+               <li><strong>Benefícios Sociais:</strong> Acesso aos sistemas de saúde e previdência europeus.</li>
+               <li><strong>Direitos Políticos:</strong> Vote e participe das eleições na Grécia e UE.</li>
+               <li><strong>Conexão Cultural:</strong> Resgate suas raízes e mantenha contato com a comunidade grega.</li>
+            </ul>
+         </section>
+         <section style="background-color: #f9f9f9; padding: 30px; border-radius: 12px; border: 2px solid #ccc; max-width: 800px; margin: 40px auto; font-family: Arial, sans-serif;">
+            <h2 style="text-align: center; color: #333; margin-bottom: 20px;">📅 Como agendar sua sessão via PIX <br/> (À vista)</h2>
+            <ol style="line-height: 1.8; color: #444; font-size: 1.1rem; padding-left: 20px;">
+               <li><strong>Agende o horário</strong> pelo <a href="#planos" style="color: #0077cc; text-decoration: none;">Calendly</a> clicando no link <b>"Agendar"</b>.</li>
+               <li><strong>Faça o pagamento via Pix</strong> antes do atendimento.</li>
+               <li><strong>Envie um e-mail</strong> para <a href="mailto:contato@cidadaniagrega.com" style="color: #0077cc;">contato@cidadaniagrega.com</a> com o comprovante <strong>até 1 hora antes</strong> do dia e horário escolhido.</li>
+            </ol>
+            <div style="margin-top: 20px; padding: 15px; background-color: #fff8dc; border: 1px dashed #ffa500; border-radius: 8px; text-align: center;">
+               <strong>💳 Chave Pix:</strong> contato@cidadaniagrega.com
+            </div>
+            <h2 style="text-align: center; color: #333; margin-bottom: 20px;">📅 Como agendar sua sessão via PayPal <br/> (Cartão de crédito)</h2>
+            <ol style="line-height: 1.8; color: #444; font-size: 1.1rem; padding-left: 20px;">
+               <li><strong>Agende o horário</strong> pelo <a href="#planos" style="color: #0077cc; text-decoration: none;">Calendly</a> clicando no link <b>"Agendar"</b>.</li>
+               <li><strong>Faça o pagamento via PayPal</strong> clicando no botão abaixo.</li>
+               <li>Com essa opção <strong>você tem a oportunidade de pagar usando seu cartão de crédito e não precisa enviar comprovante pois recebemos o e-mail automático.</strong></li>
+            </ol>
+            <div style="margin-top: 20px; padding: 15px; background-color: #fff8dc; border: 1px dashed #ffa500; border-radius: 8px; text-align: center;">
+               <strong>💳 Pague usando o PayPal <a href="#" onclick="openPaypalModal()">clicando aqui</a></strong>
+            </div>
+            <div>
+               <p<strong>.</strong></p>
+            </div>
+         </section>
+         <h2>Escolha seu plano</h2>
+         <div id="planos" class="plans">
+            <div class="plan">
+               <h3>Assessoria</h3>
+               <div class="original-price">De R$ 500,00</div>
+               <div class="price">Por R$ 300,00</div>
+               <div class="installments"><b>Á vista ou com possibilidade de pagar via cartão de crédito via PayPal.</b></div>
+               <div class="summary">
+                  Análise personalizada da sua elegibilidade, identificação de documentos e orientações para iniciar seu processo, bem como tirar quaisquer dúvidas.
+               </div>
+               <div class="buttons">
+                  <button class="btn" data-modal="modal-assessoria">Detalhes</button>
+                  <a href="https://calendly.com/cidadaniagrega/passo-a-passo" target="_blank" class="btn agendar" rel="noopener noreferrer">Agendar</a>
+               </div>
+            </div>
+            <!--<div class="plan">
+               <h3>Assessoria Completa</h3>
+               <div class="original-price">De R$ 2500,00</div>
+               <div class="price">Por R$ 1800,00</div>
+               <div class="installments">Pagamento via Pix</div>
+               <div class="summary">
+                 Suporte completo até o protocolo no consulado, recomendação de traduções juramentadas e 1 hora de assessoria mensal.
+               </div>
+               <div class="buttons">
+                 <button class="btn" data-modal="modal-completa">Detalhes</button>
+                 <a href="https://calendly.com/cidadaniagrega/completo" target="_blank" class="btn agendar" rel="noopener noreferrer">Agendar</a>
+               </div>
+               </div>-->
+         </div>
+         <!-- Aviso legal -->
+         <aside class="legal" aria-label="Aviso legal">
+            <p><strong>Aviso:</strong> A Cidadania Grega é uma <strong>assessoria particular e independente</strong>. Prestamos orientação documental e preparo para procedimentos oficiais. <strong>Não</strong> representamos o Consulado ou o Governo Grego, nem temos qualquer vínculo com órgãos públicos. O reconhecimento da cidadania e a emissão de documentos dependem exclusivamente da análise e decisão das autoridades competentes.</p>
+         </aside>
+      </main>
+      <!-- Modal escondido -->
+      <div id="paypal-modal" 
+         style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); 
+         align-items:center; justify-content:center;">
+         <div style="background:#fff; padding:20px; border-radius:12px; max-width:400px; width:100%; text-align:center; position:relative;">
+            <h3>Finalize seu pagamento</h3>
+            <div id="paypal-button-container"></div>
+            <button onclick="closePaypalModal()" 
+               style="margin-top:15px; padding:8px 14px; border:none; border-radius:8px; background:#0070ba; color:white; cursor:pointer;">
+            Fechar
+            </button>
+         </div>
       </div>
-    </div>
-
-    <!--<div class="plan">
-      <h3>Assessoria Completa</h3>
-      <div class="original-price">De R$ 2500,00</div>
-      <div class="price">Por R$ 1800,00</div>
-      <div class="installments">Pagamento via Pix</div>
-      <div class="summary">
-        Suporte completo até o protocolo no consulado, recomendação de traduções juramentadas e 1 hora de assessoria mensal.
+      <!-- Modal Assessoria -->
+      <div id="modal-assessoria" class="modal" role="dialog" aria-modal="true" aria-labelledby="assessoria-title">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h3 id="assessoria-title">Detalhes da Assessoria</h3>
+               <button class="close-btn" aria-label="Fechar modal">&times;</button>
+            </div>
+            <div class="modal-body">
+               <p>
+                  A <strong>Assessoria</strong> é uma análise personalizada que otimiza seu tempo e reduz gastos desnecessários, avaliando de forma estratégica a sua elegibilidade para a cidadania grega por descendência. Nosso objetivo é simplificar o processo e evitar que você perca tempo com etapas desnecessárias, bem como esclarecer todas as suas dúvidas.
+               </p>
+               <ul>
+                  <li>Avaliação detalhada do seu caso com base na documentação que você já possui (certidões, registros familiares, etc.).</li>
+                  <li>Identificação dos documentos faltantes e orientações claras sobre como obtê-los.</li>
+                  <li>Explicação passo a passo de como funciona o processo de reconhecimento da cidadania.</li>
+                  <li>Resposta às suas dúvidas principais sobre prazos, custos e requisitos legais.</li>
+                  <li>Sugestões de tradutores juramentados.</li>
+                  <li><strong>Ao se tornar um cliente tenha acesso a descontos exclusivos se mais sessões forem necessárias.</strong></li>
+               </ul>
+               <p>
+                  Este serviço é ideal para quem está começando e quer entender as possibilidades reais do seu caso, evitando erros e otimizando cada etapa.
+               </p>
+               <p style="font-size: 0.95em; color: #555; margin-top: 1em;">
+                  <strong>Importante:</strong> Não somos representantes do governo, consulados ou embaixadas. Nós atuamos de forma independente, baseada em experiência prática e conhecimento do processo, para orientar e facilitar seu caminho - sem intermediação oficial, mas com o passo inicial que pode fazer toda a diferença. Ajudamos a você a se preparar melhor quando for submeter sua solicitação no consulado.
+               </p>
+            </div>
+         </div>
       </div>
-      <div class="buttons">
-        <button class="btn" data-modal="modal-completa">Detalhes</button>
-        <a href="https://calendly.com/cidadaniagrega/completo" target="_blank" class="btn agendar" rel="noopener noreferrer">Agendar</a>
-      </div>
-    </div>-->
-
-  </div>
-  
-  <!-- Aviso legal -->
-    <aside class="legal" aria-label="Aviso legal">
-      <p><strong>Aviso:</strong> A Cidadania Grega é uma <strong>assessoria particular e independente</strong>. Prestamos orientação documental e preparo para procedimentos oficiais. <strong>Não</strong> representamos o Consulado ou o Governo Grego, nem temos qualquer vínculo com órgãos públicos. O reconhecimento da cidadania e a emissão de documentos dependem exclusivamente da análise e decisão das autoridades competentes.</p>
-    </aside>
-</main>
-
-<!-- Modal escondido -->
-<div id="paypal-modal" 
-     style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); 
-            align-items:center; justify-content:center;">
-  <div style="background:#fff; padding:20px; border-radius:12px; max-width:400px; width:100%; text-align:center; position:relative;">
-    <h3>Finalize seu pagamento</h3>
-    <div id="paypal-button-container"></div>
-    <button onclick="closePaypalModal()" 
-            style="margin-top:15px; padding:8px 14px; border:none; border-radius:8px; background:#0070ba; color:white; cursor:pointer;">
-      Fechar
-    </button>
-  </div>
-</div>
-
-<!-- Modal Assessoria -->
-<div id="modal-assessoria" class="modal" role="dialog" aria-modal="true" aria-labelledby="assessoria-title">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3 id="assessoria-title">Detalhes da Assessoria</h3>
-      <button class="close-btn" aria-label="Fechar modal">&times;</button>
-    </div>
-    <div class="modal-body">
-      <p>
-        A <strong>Assessoria</strong> é uma análise personalizada que otimiza seu tempo e reduz gastos desnecessários, avaliando de forma estratégica a sua elegibilidade para a cidadania grega por descendência. Nosso objetivo é simplificar o processo e evitar que você perca tempo com etapas desnecessárias, bem como esclarecer todas as suas dúvidas.
-      </p>
-      <ul>
-        <li>Avaliação detalhada do seu caso com base na documentação que você já possui (certidões, registros familiares, etc.).</li>
-        <li>Identificação dos documentos faltantes e orientações claras sobre como obtê-los.</li>
-        <li>Explicação passo a passo de como funciona o processo de reconhecimento da cidadania.</li>
-        <li>Resposta às suas dúvidas principais sobre prazos, custos e requisitos legais.</li>
-	<li>Sugestões de tradutores juramentados.</li>
-	<li><strong>Ao se tornar um cliente tenha acesso a descontos exclusivos se mais sessões forem necessárias.</strong></li>
-      </ul>
-      <p>
-        Este serviço é ideal para quem está começando e quer entender as possibilidades reais do seu caso, evitando erros e otimizando cada etapa.
-      </p>
-      <p style="font-size: 0.95em; color: #555; margin-top: 1em;">
-        <strong>Importante:</strong> Não somos representantes do governo, consulados ou embaixadas. Nós atuamos de forma independente, baseada em experiência prática e conhecimento do processo, para orientar e facilitar seu caminho - sem intermediação oficial, mas com o passo inicial que pode fazer toda a diferença. Ajudamos a você a se preparar melhor quando for submeter sua solicitação no consulado.
-      </p>
-    </div>
-  </div>
-</div>
-
-
-<!-- Modal Assessoria Completa -->
-<!--<div id="modal-completa" class="modal" role="dialog" aria-modal="true" aria-labelledby="completa-title">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3 id="completa-title">Detalhes da Assesoria Completa</h3>
-      <button class="close-btn" aria-label="Fechar modal">&times;</button>
-    </div>
-    <div class="modal-body">
-      <p>Oferecemos uma assessoria prática e objetiva para ajudar você a iniciar e conduzir o processo de obtenção da cidadania grega por descendência, com suporte essencial para as etapas mais importantes. Nosso foco é garantir que sua documentação esteja correta e que você saiba exatamente o que fazer para apresentar seu pedido ao consulado.</p>
-      <h4>O que está incluído:</h4>
-      <ul>
-        <li>Análise do seu caso e definição dos documentos necessários para a sua situação específica (pais, avós, bisavós, etc).</li>
-        <li>Orientação detalhada sobre como e onde obter certidões, registros, traduções juramentadas e apostilamento, incluindo <strong>recomendação de tradutores juramentados confiáveis</strong>.</li>
-        <li>Checklist completo e personalizado para você acompanhar todas as etapas da preparação documental.</li>
-        <li>Revisão e organização do dossiê documental para garantir que tudo esteja correto antes da entrega no consulado.</li>
-        <li>Suporte para dúvidas durante essa fase inicial, ajudando a resolver questões comuns.</li>
-        <li>Orientação sobre como protocolar o pedido no consulado grego e quais documentos levar.</li>
-        <li><strong>1 hora de assessoria por mês via vídeo</strong>, também suporte via Whatsapp, para esclarecer dúvidas e acompanhar seu progresso, até o final do processo.</li>
-      </ul>
-      <h4>O que <em>não</em> está incluído:</h4>
-      <ul>
-        <li>Não fazemos registro retroativo de ancestrais falecidos ou não registrados na Grécia.</li>
-        <li>Não traduzimos os documentos, mas indicamos tradutores juramentados e melhores caminhos caso a caso.</li>
-        <li>Não fazemos representação física ou virtual do cliente, é importante ressaltar que todos os passos do processo no consulado devem ser feitos pelo solicitante.</li>
-      </ul>
-      <h4>Benefícios para você:</h4>
-      <ul>
-        <li>Custo mais acessível para quem quer iniciar a cidadania com segurança.</li>
-        <li>Autonomia para conduzir o processo no consulado, com apoio profissional nas etapas iniciais.</li>
-        <li>Orientação clara e prática para evitar erros comuns e atrasos.</li>
-        <li>Suporte regular para que você nunca fique sem resposta em dúvidas importantes durante o processo.</li>
-      </ul>
-    </div>
-  </div>
-</div>-->
-
-<footer>
-  <img src="contato.png" 
-       alt="Informações de contato" 
-       style="max-width: 400px; display: block; margin: 0 auto;">
-  <p><a href="mailto:contato@cidadaniagrega.com">contato@cidadaniagrega.com</a></p>
-  <p>© 2025 Assessoria Cidadania Grega - Consultoria Independente. Todos os direitos reservados</p>
-</footer>
-
-<script>
-  // Função para abrir modal
-  function openModal(modalId) {
-    document.getElementById(modalId).style.display = 'block';
-  }
-  // Função para fechar modal
-  function closeModal(modal) {
-    modal.style.display = 'none';
-  }
-
-  // Abrir modais ao clicar nos botões "Detalhes"
-  document.querySelectorAll('button[data-modal]').forEach(button => {
-    button.addEventListener('click', () => {
-      openModal(button.getAttribute('data-modal'));
-    });
-  });
-
-  // Fechar modal ao clicar no botão fechar
-  document.querySelectorAll('.close-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      closeModal(btn.closest('.modal'));
-    });
-  });
-
-  // Fechar modal ao clicar fora do conteúdo
-  window.addEventListener('click', (e) => {
-    document.querySelectorAll('.modal').forEach(modal => {
-      if (e.target === modal) {
-        closeModal(modal);
-      }
-    });
-  });
-
-  // Fechar modal com tecla ESC
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      document.querySelectorAll('.modal').forEach(modal => {
-        closeModal(modal);
-      });
-    }
-  });
-</script>
-
-<script src="https://www.paypal.com/sdk/js?client-id=BAApYVA0191jO-Ei6ScgFroZbVt7jkVPpRlhTgWTTfAcPBXqIVXXeUudUvK-QL868-oVUY5hESrURHQSJQ&currency=BRL"></script>
-
-<script>
-  // Renderiza o botão do PayPal DENTRO do modal
-  paypal.Buttons({
-    style: {
-      color: 'blue',
-      shape: 'pill',
-      label: 'checkout',
-    },
-    createOrder: function (data, actions) {
-      return actions.order.create({
-        purchase_units: [{
-          amount: { value: '300.00', currency_code: 'BRL' } // valor em reais
-        }]
-      });
-    },
-    onApprove: function (data, actions) {
-      return actions.order.capture().then(function (details) {
-        alert('Pagamento realizado com sucesso por ' + details.payer.name.given_name);
-        closePaypalModal();
-      });
-    }
-  }).render('#paypal-button-container');
-
-  // Funções para abrir e fechar modal
-  function openPaypalModal() {
-    document.getElementById('paypal-modal').style.display = 'flex';
-  }
-
-  function closePaypalModal() {
-    document.getElementById('paypal-modal').style.display = 'none';
-  }
-</script>
-
-</body>
+      <!-- Modal Assessoria Completa -->
+      <!--<div id="modal-completa" class="modal" role="dialog" aria-modal="true" aria-labelledby="completa-title">
+         <div class="modal-content">
+           <div class="modal-header">
+             <h3 id="completa-title">Detalhes da Assesoria Completa</h3>
+             <button class="close-btn" aria-label="Fechar modal">&times;</button>
+           </div>
+           <div class="modal-body">
+             <p>Oferecemos uma assessoria prática e objetiva para ajudar você a iniciar e conduzir o processo de obtenção da cidadania grega por descendência, com suporte essencial para as etapas mais importantes. Nosso foco é garantir que sua documentação esteja correta e que você saiba exatamente o que fazer para apresentar seu pedido ao consulado.</p>
+             <h4>O que está incluído:</h4>
+             <ul>
+               <li>Análise do seu caso e definição dos documentos necessários para a sua situação específica (pais, avós, bisavós, etc).</li>
+               <li>Orientação detalhada sobre como e onde obter certidões, registros, traduções juramentadas e apostilamento, incluindo <strong>recomendação de tradutores juramentados confiáveis</strong>.</li>
+               <li>Checklist completo e personalizado para você acompanhar todas as etapas da preparação documental.</li>
+               <li>Revisão e organização do dossiê documental para garantir que tudo esteja correto antes da entrega no consulado.</li>
+               <li>Suporte para dúvidas durante essa fase inicial, ajudando a resolver questões comuns.</li>
+               <li>Orientação sobre como protocolar o pedido no consulado grego e quais documentos levar.</li>
+               <li><strong>1 hora de assessoria por mês via vídeo</strong>, também suporte via Whatsapp, para esclarecer dúvidas e acompanhar seu progresso, até o final do processo.</li>
+             </ul>
+             <h4>O que <em>não</em> está incluído:</h4>
+             <ul>
+               <li>Não fazemos registro retroativo de ancestrais falecidos ou não registrados na Grécia.</li>
+               <li>Não traduzimos os documentos, mas indicamos tradutores juramentados e melhores caminhos caso a caso.</li>
+               <li>Não fazemos representação física ou virtual do cliente, é importante ressaltar que todos os passos do processo no consulado devem ser feitos pelo solicitante.</li>
+             </ul>
+             <h4>Benefícios para você:</h4>
+             <ul>
+               <li>Custo mais acessível para quem quer iniciar a cidadania com segurança.</li>
+               <li>Autonomia para conduzir o processo no consulado, com apoio profissional nas etapas iniciais.</li>
+               <li>Orientação clara e prática para evitar erros comuns e atrasos.</li>
+               <li>Suporte regular para que você nunca fique sem resposta em dúvidas importantes durante o processo.</li>
+             </ul>
+           </div>
+         </div>
+         </div>-->
+      <footer>
+         <img src="contato.png" 
+            alt="Informações de contato" 
+            style="max-width: 400px; display: block; margin: 0 auto;">
+         <p><a href="mailto:contato@cidadaniagrega.com">contato@cidadaniagrega.com</a></p>
+         <p>© 2025 Assessoria Cidadania Grega - Consultoria Independente. Todos os direitos reservados</p>
+      </footer>
+      <script>
+         // Função para abrir modal
+         function openModal(modalId) {
+           document.getElementById(modalId).style.display = 'block';
+         }
+         // Função para fechar modal
+         function closeModal(modal) {
+           modal.style.display = 'none';
+         }
+         
+         // Abrir modais ao clicar nos botões "Detalhes"
+         document.querySelectorAll('button[data-modal]').forEach(button => {
+           button.addEventListener('click', () => {
+             openModal(button.getAttribute('data-modal'));
+           });
+         });
+         
+         // Fechar modal ao clicar no botão fechar
+         document.querySelectorAll('.close-btn').forEach(btn => {
+           btn.addEventListener('click', () => {
+             closeModal(btn.closest('.modal'));
+           });
+         });
+         
+         // Fechar modal ao clicar fora do conteúdo
+         window.addEventListener('click', (e) => {
+           document.querySelectorAll('.modal').forEach(modal => {
+             if (e.target === modal) {
+               closeModal(modal);
+             }
+           });
+         });
+         
+         // Fechar modal com tecla ESC
+         window.addEventListener('keydown', (e) => {
+           if (e.key === 'Escape') {
+             document.querySelectorAll('.modal').forEach(modal => {
+               closeModal(modal);
+             });
+           }
+         });
+      </script>
+      <script src="https://www.paypal.com/sdk/js?client-id=BAApYVA0191jO-Ei6ScgFroZbVt7jkVPpRlhTgWTTfAcPBXqIVXXeUudUvK-QL868-oVUY5hESrURHQSJQ&currency=BRL"></script>
+      <script>
+         // Renderiza o botão do PayPal DENTRO do modal
+         paypal.Buttons({
+           style: {
+             color: 'blue',
+             shape: 'pill',
+             label: 'checkout',
+           },
+           createOrder: function (data, actions) {
+             return actions.order.create({
+               purchase_units: [{
+                 amount: { value: '300.00', currency_code: 'BRL' } // valor em reais
+               }]
+             });
+           },
+           onApprove: function (data, actions) {
+             return actions.order.capture().then(function (details) {
+               alert('Pagamento realizado com sucesso por ' + details.payer.name.given_name);
+               closePaypalModal();
+             });
+           }
+         }).render('#paypal-button-container');
+         
+         // Funções para abrir e fechar modal
+         function openPaypalModal() {
+           document.getElementById('paypal-modal').style.display = 'flex';
+         }
+         
+         function closePaypalModal() {
+           document.getElementById('paypal-modal').style.display = 'none';
+         }
+      </script>
+   </body>
 </html>
