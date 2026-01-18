@@ -493,65 +493,6 @@
          color: var(--primary-color);
       }
 
-      .plans {
-         display: flex;
-         gap: 30px;
-         flex-wrap: wrap;
-         justify-content: center;
-         margin-top: 50px;
-      }
-
-      .plan {
-         background: var(--surface-color);
-         border-radius: 16px;
-         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-         flex: 1 1 350px;
-         max-width: 450px;
-         padding: 40px 35px;
-         display: flex;
-         flex-direction: column;
-         align-items: center;
-         text-align: center;
-         transition: transform 0.3s ease, box-shadow 0.3s ease;
-         border: 2px solid transparent;
-      }
-
-      .plan:hover {
-         transform: translateY(-8px);
-         box-shadow: 0 12px 30px rgba(13, 71, 161, 0.15);
-         border-color: var(--secondary-color);
-      }
-
-      .plan h3 {
-         margin-top: 0;
-         color: var(--primary-color);
-         font-size: 1.8rem;
-         font-weight: 700;
-         margin-bottom: 15px;
-      }
-
-      .price {
-         font-size: 2.5rem;
-         font-weight: 700;
-         color: var(--secondary-color);
-         margin-bottom: 15px;
-      }
-
-      .summary {
-         font-size: 1.05rem;
-         margin-bottom: 30px;
-         flex-grow: 1;
-         color: var(--text-secondary);
-         line-height: 1.7;
-      }
-
-      .buttons {
-         width: 100%;
-         display: flex;
-         flex-direction: column;
-         gap: 15px;
-      }
-
       .btn {
          background: linear-gradient(135deg, var(--secondary-color) 0%, #FF8F00 100%);
          color: white;
@@ -684,15 +625,6 @@
          .hero-section p {
             font-size: 1rem;
          }
-
-         .plans {
-            flex-direction: column;
-            align-items: center;
-         }
-
-         .plan {
-            max-width: 100%;
-         }
       }
    </style>
 </head>
@@ -791,15 +723,61 @@
          </p>
          <h3 data-i18n="process.who_qualifies">👥 Quem Tem Direito?</h3>
          <ul>
-            <li data-i18n="process.qualify1">👶 <strong>Filhos de cidadãos gregos</strong> - Direito automático se pelo
-               menos um dos pais for grego</li>
-            <li data-i18n="process.qualify2">👨‍👩‍👧 <strong>Netos de gregos</strong> - Se seu pai ou mãe registrou a
-               cidadania
-               antes do seu nascimento</li>
-            <li data-i18n="process.qualify3">🌳 <strong>Bisnetos</strong> - Possível através do processo de
-               retroatividade
+            <li data-i18n="process.qualify1">👶 <strong>Filhos diretos de gregos:</strong> Transmissão automática. Se o
+               pai é grego, a cidadania passa diretamente independentemente do ano de nascimento. Se a mãe é grega,
+               aplica-se a regra de 1982: filhos nascidos após 1982 têm direito automático; antes de 1982, apenas se a
+               mãe era casada com grego.</li>
+            <li data-i18n="process.qualify2">👨‍👩‍👧 <strong>Netos de gregos:</strong> Possível através do processo de
+               <strong>retroatividade</strong> - seus pais (filhos do grego) podem reconhecer a cidadania
+               retroativamente mesmo após seu nascimento. Isso permite que você, como neto, também adquira o direito.
+               As mesmas regras de gênero e ano (1982) aplicam-se à geração intermediária.
+            </li>
+            <li data-i18n="process.qualify3">🌳 <strong>Bisnetos e gerações seguintes:</strong> Também possível via
+               <strong>retroatividade em cascata</strong> - cada geração pode reconhecer a cidadania retroativamente,
+               transmitindo para a próxima. Quanto mais gerações, mais complexo o processo, mas é viável se todos os
+               requisitos forem atendidos em cada etapa.
             </li>
          </ul>
+         <h3 data-i18n="process.critical_requirements">⚠️ Requisitos Críticos de Elegibilidade</h3>
+         <p data-i18n="process.critical_intro">
+            Para ter direito à cidadania grega, é fundamental que você atenda a <strong>todos</strong> os seguintes
+            requisitos:
+         </p>
+         <ul>
+            <li data-i18n="process.req_documents">📜 <strong>Documentos Oficiais Gregos:</strong> Você deve ter a
+               certidão de nascimento grega original do seu ancestral (ou registro consular). Sem este documento, não é
+               possível comprovar a origem grega.</li>
+            <li data-i18n="process.req_male_line">👨 <strong>Linha Masculina (Qualquer Época):</strong> Se seu
+               ancestral grego for do sexo masculino (pai, avô, bisavô), a transmissão da cidadania é direta,
+               independentemente da data de nascimento dos descendentes.</li>
+            <li data-i18n="process.req_female_line">👩 <strong>Linha Feminina (Importante):</strong> Se seu ancestral
+               grego for do sexo feminino (mãe, avó, bisavó), existem regras específicas:
+               <ul style="margin-top: 10px;">
+                  <li data-i18n="process.req_female_after1982">✅ <strong>Filhos Nascidos Após 1982:</strong> A
+                     transmissão de cidadania por mãe grega é automática para filhos nascidos após esta data,
+                     independentemente do estado civil da mãe.</li>
+                  <li data-i18n="process.req_female_before1982">⚠️ <strong>Filhos Nascidos Antes de 1982:</strong> Para
+                     filhos nascidos antes de 1982, a mãe grega só transmite cidadania se ela era <strong>casada com um
+                        cidadão grego</strong> no momento do nascimento. Se ela era casada com estrangeiro, solteira ou
+                     divorciada, a transmissão pode não ser possível.</li>
+               </ul>
+            </li>
+            <li data-i18n="process.req_recognition">✍️ <strong>Reconhecimento Legal:</strong> Todos os filhos na linha
+               de descendência devem ter sido legalmente reconhecidos pelos pais gregos (ou descendentes diretos). Isso
+               significa que as certidões de nascimento devem listar o pai/mãe corretamente.</li>
+            <li data-i18n="process.req_civil_records">📋 <strong>Registros Civis Completos:</strong> Todos os
+               nascimentos e casamentos na sua linha de descendência (do ancestral grego até você) devem estar
+               devidamente registrados. A falta de qualquer registro pode tornar o processo mais complexo ou
+               impossível.</li>
+         </ul>
+         <div class="eligibility-notice" data-i18n="process.eligibility_notice"
+            style="margin-top: 20px; padding: 20px; background: rgba(13, 71, 161, 0.1); border-left: 4px solid var(--primary-color); border-radius: 8px;">
+            <p style="margin: 0; font-weight: 600; color: var(--primary-color);">💡 Cada Caso é Único!</p>
+            <p style="margin-top: 10px; font-size: 0.95rem;">As regras de elegibilidade podem ser complexas,
+               especialmente quando envolvem ancestrais femininos ou múltiplas gerações. Nossa consultoria
+               especializada pode avaliar seu caso específico e determinar exatamente quais documentos você precisa e
+               se há algum impedimento no seu processo.</p>
+         </div>
       </section>
 
       <section class="info-section scroll-animate">
@@ -831,30 +809,53 @@
       <section class="info-section scroll-animate">
          <h2 data-i18n="timeline.title">⏳ Cronograma Típico do Processo</h2>
          <div data-i18n="timeline.content">
-            <p><strong>📅 Fase 1: Preparação (3-6 meses)</strong></p>
+            <p><strong>📅 Fase 1: Preparação (3-6 meses) - A FASE MAIS CRÍTICA!</strong></p>
             <ul>
                <li>Localização e obtenção de certidões brasileiras</li>
                <li>Pesquisa de documentos gregos do ancestral</li>
                <li>Tradução juramentada de todos os documentos</li>
                <li>Apostilamento via Convenção de Haia</li>
             </ul>
-            <p><strong>📤 Fase 2: Protocolo (1-2 meses)</strong></p>
+            <p style="font-style: italic; color: var(--secondary-color); margin-top: 10px;">
+               ⚡ <strong>Importante:</strong> Se todos os documentos forem levantados e solicitados corretamente nesta
+               fase, as próximas etapas serão muito mais rápidas e sem complicações!
+            </p>
+            <p><strong>📤 Fase 2: Protocolo (varia por consulado)</strong></p>
             <ul>
                <li>Agendamento no consulado grego</li>
                <li>Entrega da documentação completa</li>
                <li>Pagamento de taxas consulares</li>
             </ul>
-            <p><strong>🇬🇷 Fase 3: Análise na Grécia (12-36 meses)</strong></p>
+            <p style="font-size: 0.9rem; margin-top: 5px;">
+               <em>✔️ Documentação correta na Fase 1 = Aceitação imediata pelo consulado, sem retrabalho.</em>
+            </p>
+            <p><strong>🇬🇷 Fase 3: Análise na Grécia (varia por município)</strong></p>
             <ul>
                <li>Envio dos documentos para análise na Grécia</li>
                <li>Registro nos arquivos municipais gregos</li>
                <li>Emissão de certidões gregas</li>
             </ul>
-            <p><strong>✅ Fase 4: Finalização (1-3 meses)</strong></p>
+            <p style="font-size: 0.9rem; margin-top: 5px;">
+               <em>✔️ Documentos bem preparados = Processamento mais rápido, sem solicitações de complementação.</em>
+            </p>
+            <p><strong>✅ Fase 4: Finalização (varia por autoridades)</strong></p>
             <ul>
-               <li>Obtenção do número de protocolo (AMKA)</li>
                <li>Solicitação de passaporte europeu</li>
             </ul>
+            <p style="font-size: 0.9rem; margin-top: 5px;">
+               <em>✔️ Processo bem-feito desde o início = Finalização rápida e sem surpresas.</em>
+            </p>
+            <div style="margin-top: 15px; padding: 15px; background: rgba(13, 71, 161, 0.1); border-radius: 8px;">
+               <p style="margin: 0; font-weight: 600; color: var(--primary-color);">⚡ Tempo Total das Fases 2, 3 e 4:
+               </p>
+               <p style="margin-top: 8px; font-size: 0.95rem;">
+                  Quando tudo é preparado corretamente na <strong>Fase 1</strong>, cada registro nas fases 2, 3 e 4
+                  geralmente leva <strong>entre 1-3 meses</strong>. <strong>No caso de processos retroativos</strong>
+                  (múltiplas gerações), cada geração precisa ser registrada sequencialmente, então o tempo total
+                  será multiplicado pelo número de gerações envolvidas. O prazo varia conforme o consulado
+                  específico, o município na Grécia e as autoridades envolvidas.
+               </p>
+            </div>
          </div>
          <div class="consultancy-notice" data-i18n="timeline.consultancy_notice"
             style="margin-top: 20px; padding: 20px; background: rgba(255, 111, 0, 0.1); border-left: 4px solid var(--secondary-color); border-radius: 8px;">
@@ -903,24 +904,23 @@
             <strong>Clique no botão abaixo para acessar nosso calendário e agendar sua sessão de consultoria
                paga.</strong>
          </p>
-      </section>
-
-      <div class="plans">
-         <div class="plan">
-            <h3 data-i18n="plan.title">Consultoria Especializada</h3>
-            <div class="price" data-i18n="plan.price">R$ 300,00</div>
-            <div class="summary" data-i18n="plan.description">
-               Análise personalizada da sua elegibilidade, identificação de documentos necessários e orientações
-               detalhadas para iniciar seu processo de cidadania grega. Sessão de 1 hora com especialista.
-            </div>
-            <div class="buttons">
-               <a href="https://calendly.com/cidadaniagrega/passo-a-passo" target="_blank" class="btn"
-                  rel="noopener noreferrer" data-i18n="plan.button">
-                  Agendar Consultoria
-               </a>
-            </div>
+         <div data-i18n="consultation.payment_info"
+            style="margin-top: 20px; padding: 20px; background: rgba(255, 111, 0, 0.08); border-radius: 10px; border-left: 4px solid var(--secondary-color);">
+            <p style="margin: 0; font-weight: 600; color: var(--secondary-color);">💳 Informações sobre Pagamento</p>
+            <p style="margin-top: 12px; font-size: 0.95rem; line-height: 1.7;">
+               Como nossa consultoria é <strong>global</strong>, todos os pagamentos são processados em
+               <strong>dólares americanos (USD)</strong> via <strong>PayPal</strong>. Ao agendar sua sessão, você
+               precisará ter uma conta PayPal (ou criar uma gratuitamente). O PayPal converterá automaticamente o
+               valor para sua moeda local na maioria dos países, usando a taxa de câmbio atual.
+            </p>
          </div>
-      </div>
+         <div style="margin-top: 30px; text-align: center;">
+            <a href="https://calendly.com/cidadaniagrega/passo-a-passo" target="_blank" class="btn"
+               rel="noopener noreferrer" data-i18n="consultation.button">
+               Agendar Consultoria
+            </a>
+         </div>
+      </section>
 
       <aside class="legal">
          <p data-i18n="legal.disclaimer">
@@ -961,9 +961,19 @@
             'process.title': '🛤️ Entenda o Processo de Cidadania Grega',
             'process.overview': 'O processo de reconhecimento da cidadania grega por descendência é baseado no princípio do <strong>jus sanguinis</strong> (direito de sangue). Isso significa que se você tem ancestrais gregos, pode ter direito automático à cidadania, independentemente de onde nasceu.',
             'process.who_qualifies': '👥 Quem Tem Direito?',
-            'process.qualify1': '👶 <strong>Filhos de cidadãos gregos</strong> - Direito automático se pelo menos um dos pais for grego',
-            'process.qualify2': '👨‍👩‍👧 <strong>Netos de gregos</strong> - Se seu pai ou mãe registrou a cidadania antes do seu nascimento',
-            'process.qualify3': '🌳 <strong>Bisnetos</strong> - Possível através do processo de retroatividade',
+            'process.qualify1': '👶 <strong>Filhos diretos de gregos:</strong> Transmissão automática. Se o pai é grego, a cidadania passa diretamente independentemente do ano de nascimento. Se a mãe é grega, aplica-se a regra de 1982: filhos nascidos após 1982 têm direito automático; antes de 1982, apenas se a mãe era casada com grego.',
+            'process.qualify2': '👨‍👩‍👧 <strong>Netos de gregos:</strong> Possível através do processo de <strong>retroatividade</strong> - seus pais (filhos do grego) podem reconhecer a cidadania retroativamente mesmo após seu nascimento. Isso permite que você, como neto, também adquira o direito. As mesmas regras de gênero e ano (1982) aplicam-se à geração intermediária.',
+            'process.qualify3': '🌳 <strong>Bisnetos e gerações seguintes:</strong> Também possível via <strong>retroatividade em cascata</strong> - cada geração pode reconhecer a cidadania retroativamente, transmitindo para a próxima. Quanto mais gerações, mais complexo o processo, mas é viável se todos os requisitos forem atendidos em cada etapa.',
+            'process.critical_requirements': '⚠️ Requisitos Críticos de Elegibilidade',
+            'process.critical_intro': 'Para ter direito à cidadania grega, é fundamental que você atenda a <strong>todos</strong> os seguintes requisitos:',
+            'process.req_documents': '📜 <strong>Documentos Oficiais Gregos:</strong> Você deve ter a certidão de nascimento grega original do seu ancestral (ou registro consular). Sem este documento, não é possível comprovar a origem grega.',
+            'process.req_male_line': '👨 <strong>Linha Masculina (Qualquer Época):</strong> Se seu ancestral grego for do sexo masculino (pai, avô, bisavô), a transmissão da cidadania é direta, independentemente da data de nascimento dos descendentes.',
+            'process.req_female_line': '👩 <strong>Linha Feminina (Importante):</strong> Se seu ancestral grego for do sexo feminino (mãe, avó, bisavó), existem regras específicas:',
+            'process.req_female_after1982': '✅ <strong>Filhos Nascidos Após 1982:</strong> A transmissão de cidadania por mãe grega é automática para filhos nascidos após esta data, independentemente do estado civil da mãe.',
+            'process.req_female_before1982': '⚠️ <strong>Filhos Nascidos Antes de 1982:</strong> Para filhos nascidos antes de 1982, a mãe grega só transmite cidadania se ela era <strong>casada com um cidadão grego</strong> no momento do nascimento. Se ela era casada com estrangeiro, solteira ou divorciada, a transmissão pode não ser possível.',
+            'process.req_recognition': '✍️ <strong>Reconhecimento Legal:</strong> Todos os filhos na linha de descendência devem ter sido legalmente reconhecidos pelos pais gregos (ou descendentes diretos). Isso significa que as certidões de nascimento devem listar o pai/mãe corretamente.',
+            'process.req_civil_records': '📋 <strong>Registros Civis Completos:</strong> Todos os nascimentos e casamentos na sua linha de descendência (do ancestral grego até você) devem estar devidamente registrados. A falta de qualquer registro pode tornar o processo mais complexo ou impossível.',
+            'process.eligibility_notice': '<p style="margin: 0; font-weight: 600; color: var(--primary-color);">💡 Cada Caso é Único!</p><p style="margin-top: 10px; font-size: 0.95rem;">As regras de elegibilidade podem ser complexas, especialmente quando envolvem ancestrais femininos ou múltiplas gerações. Nossa consultoria especializada pode avaliar seu caso específico e determinar exatamente quais documentos você precisa e se há algum impedimento no seu processo.</p>',
             'requirements.title': '📄 Principais Requisitos e Documentos',
             'requirements.basic_docs': '📝 Documentos Básicos Necessários',
             'requirements.doc1': '👶 <strong>Certidões de nascimento</strong> - De todos os descendentes na linha até o ancestral grego',
@@ -974,7 +984,7 @@
             'requirements.doc6': '✔️ <strong>Apostilamento</strong> - Documentos devem ser apostilados conforme Convenção de Haia',
             'requirements.note': '<strong>Importante:</strong> Cada caso é único e pode requerer documentos adicionais específicos. A ordem e a sequência dos documentos são cruciais para o sucesso do processo.',
             'timeline.title': '⏳ Cronograma Típico do Processo',
-            'timeline.content': '<p><strong>📅 Fase 1: Preparação (3-6 meses)</strong></p><ul><li>Localização e obtenção de certidões brasileiras</li><li>Pesquisa de documentos gregos do ancestral</li><li>Tradução juramentada de todos os documentos</li><li>Apostilamento via Convenção de Haia</li></ul><p><strong>📤 Fase 2: Protocolo (1-2 meses)</strong></p><ul><li>Agendamento no consulado grego</li><li>Entrega da documentação completa</li><li>Pagamento de taxas consulares</li></ul><p><strong>🇬🇷 Fase 3: Análise na Grécia (12-36 meses)</strong></p><ul><li>Envio dos documentos para análise na Grécia</li><li>Registro nos arquivos municipais gregos</li><li>Emissão de certidões gregas</li></ul><p><strong>✅ Fase 4: Finalização (1-3 meses)</strong></p><ul><li>Obtenção do número de protocolo (AMKA)</li><li>Solicitação de passaporte europeu</li></ul>',
+            'timeline.content': '<p><strong>📅 Fase 1: Preparação (3-6 meses) - A FASE MAIS CRÍTICA!</strong></p><ul><li>Localização e obtenção de certidões brasileiras</li><li>Pesquisa de documentos gregos do ancestral</li><li>Tradução juramentada de todos os documentos</li><li>Apostilamento via Convenção de Haia</li></ul><p style="font-style: italic; color: var(--secondary-color); margin-top: 10px;">⚡ <strong>Importante:</strong> Se todos os documentos forem levantados e solicitados corretamente nesta fase, as próximas etapas serão muito mais rápidas e sem complicações!</p><p><strong>📤 Fase 2: Protocolo (varia por consulado)</strong></p><ul><li>Agendamento no consulado grego</li><li>Entrega da documentação completa</li><li>Pagamento de taxas consulares</li></ul><p style="font-size: 0.9rem; margin-top: 5px;"><em>✔️ Documentação correta na Fase 1 = Aceitação imediata pelo consulado, sem retrabalho.</em></p><p><strong>🇬🇷 Fase 3: Análise na Grécia (varia por município / cartórios)</strong></p><ul><li>Envio dos documentos para análise na Grécia</li><li>Registro nos arquivos municipais gregos</li><li>Emissão de certidões gregas</li></ul><p style="font-size: 0.9rem; margin-top: 5px;"><em>✔️ Documentos bem preparados = Processamento mais rápido, sem solicitações de complementação.</em></p><p><strong>✅ Fase 4: Finalização (varia por autoridades)</strong></p><ul><li>Solicitação de passaporte europeu</li></ul><p style="font-size: 0.9rem; margin-top: 5px;"><em>✔️ Processo bem-feito desde o início = Finalização rápida e sem surpresas.</em></p><div style="margin-top: 15px; padding: 15px; background: rgba(13, 71, 161, 0.1); border-radius: 8px;"><p style="margin: 0; font-weight: 600; color: var(--primary-color);">⚡ Tempo Total das Fases 2, 3 e 4:</p><p style="margin-top: 8px; font-size: 0.95rem;">Quando tudo é preparado corretamente na <strong>Fase 1</strong>, cada registro nas fases 2, 3 e 4 geralmente leva <strong>entre 1-3 meses</strong>. <strong>No caso de processos retroativos</strong> (múltiplas gerações), cada geração precisa ser registrada sequencialmente, então o tempo total será multiplicado pelo número de gerações envolvidas. O prazo varia conforme o consulado específico, o município na Grécia e as autoridades envolvidas.</p></div>',
             'timeline.consultancy_notice': '<p style="margin: 0; font-weight: 600; color: var(--secondary-color);">⚡ Com Consultoria Especializada, Você Pode Reduzir Significativamente Esses Prazos!</p><p style="margin-top: 10px; font-size: 0.95rem;">Erros comuns na documentação, ordem incorreta dos procedimentos e falta de conhecimento sobre requisitos específicos podem adicionar <strong>meses ou até anos</strong> ao processo. Nossa orientação profissional ajuda você a evitar esses problemas desde o início, economizando tempo e garantindo que tudo seja feito corretamente na primeira tentativa.</p>',
             'benefits.title': '🌟 Por Que Adquirir a Cidadania Grega? Conheça os Benefícios Exclusivos!',
             'benefits.eu': '🇪🇺 <strong>Cidadania Europeia:</strong> Direito de morar, trabalhar e estudar em qualquer país da União Europeia.',
@@ -989,10 +999,8 @@
             'consultation.title': '💬 Consultoria Personalizada de Cidadania Grega',
             'consultation.description': 'Oferecemos uma sessão de consultoria de <strong>1 hora</strong> para avaliar seu caso específico, identificar os documentos necessários e fornecer orientações claras sobre o processo de cidadania grega. Nossa consultoria é focada em oferecer o máximo de valor em uma única sessão produtiva.',
             'consultation.cta': '<strong>Clique no botão abaixo para acessar nosso calendário e agendar sua sessão de consultoria paga.</strong>',
-            'plan.title': 'Consultoria Especializada',
-            'plan.price': '$99 USD',
-            'plan.description': 'Análise personalizada da sua elegibilidade, identificação de documentos necessários e orientações detalhadas para iniciar seu processo de cidadania grega. Sessão de 1 hora com especialista.',
-            'plan.button': 'Agendar Consultoria',
+            'consultation.payment_info': '<p style="margin: 0; font-weight: 600; color: var(--secondary-color);">💳 Informações sobre Pagamento</p><p style="margin-top: 12px; font-size: 0.95rem; line-height: 1.7;">Como nossa consultoria é <strong>global</strong>, todos os pagamentos são processados em <strong>dólares americanos (USD)</strong> via <strong>PayPal</strong>. Ao agendar sua sessão, você precisará ter uma conta PayPal (ou criar uma gratuitamente). O PayPal converterá automaticamente o valor para sua moeda local na maioria dos países, usando a taxa de câmbio atual.</p>',
+            'consultation.button': 'Agendar Consultoria',
             'legal.disclaimer': '<strong>Aviso:</strong> A Cidadania Grega é uma <strong>assessoria particular e independente</strong>. Prestamos orientação documental e preparo para procedimentos oficiais. <strong>Não</strong> representamos o Consulado ou o Governo Grego, nem temos qualquer vínculo com órgãos públicos. O reconhecimento da cidadania e a emissão de documentos dependem exclusivamente da análise e decisão das autoridades competentes.',
             'footer.copyright': '© 2026 Assessoria Cidadania Grega - Consultoria Independente. Todos os direitos reservados'
          },
@@ -1010,13 +1018,23 @@
             'trust.expert': 'Expert',
             'trust.expert_desc': 'Personalized Consultation',
             'stats.title': '📊 Did You Know? Over 7 Million Greeks Live Outside Greece!',
-            'stats.content': 'The Greek diaspora is one of the oldest and largest in the world. An estimated <strong>7 million people of Greek descent</strong> live outside Greece and Cyprus. Major communities include the <strong>United States (3 million)</strong>, <strong>Australia (700,000)</strong>, <strong>Canada (720,000)</strong>, and <strong>Germany (370,000)</strong>. This means millions worldwide may be eligible for Greek citizenship through ancestry.',
+            'stats.content': 'The Greek diaspora is one of the oldest and largest in the world. An estimated <strong>7 million people of Greek descent</strong> live outside Greece and Cyprus. Major communities include the <strong>United States (3 million)</strong>, <strong>Australia (700,000)</strong>, <strong>Canada (720,000)</strong>, and <strong>Brazil (100,000)</strong>. This means millions worldwide may be eligible for Greek citizenship through ancestry.',
             'process.title': '🛤️ Understanding the Greek Citizenship Process',
             'process.overview': 'Greek citizenship by descent is based on the <strong>jus sanguinis</strong> principle (right of blood). This means if you have Greek ancestors, you may have automatic rights to citizenship regardless of where you were born.',
             'process.who_qualifies': '👥 Who Qualifies?',
-            'process.qualify1': '👶 <strong>Children of Greek citizens</strong> - Automatic right if at least one parent is Greek',
-            'process.qualify2': '👨‍👩‍👧 <strong>Grandchildren of Greeks</strong> - If your parent registered citizenship before your birth',
-            'process.qualify3': '🌳 <strong>Great-grandchildren</strong> - Possible through retroactive registration process',
+            'process.qualify1': '👶 <strong>Direct children of Greeks:</strong> Automatic transmission. If the father is Greek, citizenship passes directly regardless of birth year. If the mother is Greek, the 1982 rule applies: children born after 1982 have automatic rights; before 1982, only if the mother was married to a Greek citizen.',
+            'process.qualify2': '👨‍👩‍👧 <strong>Grandchildren of Greeks:</strong> Possible through the <strong>retroactivity process</strong> - your parents (children of the Greek ancestor) can recognize citizenship retroactively even after your birth. This allows you, as a grandchild, to also acquire the right. The same gender and year rules (1982) apply to the intermediate generation.',
+            'process.qualify3': '🌳 <strong>Great-grandchildren and following generations:</strong> Also possible via <strong>cascading retroactivity</strong> - each generation can recognize citizenship retroactively, transmitting to the next. The more generations, the more complex the process, but it\'s viable if all requirements are met at each stage.',
+            'process.critical_requirements': '⚠️ Critical Eligibility Requirements',
+            'process.critical_intro': 'To qualify for Greek citizenship, it is essential that you meet <strong>all</strong> of the following requirements:',
+            'process.req_documents': '📜 <strong>Official Greek Documents:</strong> You must have your ancestor\'s original Greek birth certificate (or consular registration). Without this document, it is impossible to prove Greek origin.',
+            'process.req_male_line': '👨 <strong>Male Line (Any Era):</strong> If your Greek ancestor is male (father, grandfather, great-grandfather), citizenship transmission is direct, regardless of descendants\' birth dates.',
+            'process.req_female_line': '👩 <strong>Female Line (Important):</strong> If your Greek ancestor is female (mother, grandmother, great-grandmother), specific rules apply:',
+            'process.req_female_after1982': '✅ <strong>Children Born After 1982:</strong> Citizenship transmission through a Greek mother is automatic for children born after this date, regardless of the mother\'s marital status.',
+            'process.req_female_before1982': '⚠️ <strong>Children Born Before 1982:</strong> For children born before 1982, a Greek mother only transmits citizenship if she was <strong>married to a Greek citizen</strong> at the time of birth. If she was married to a foreigner, single, or divorced, transmission may not be possible.',
+            'process.req_recognition': '✍️ <strong>Legal Recognition:</strong> All children in the line of descent must have been legally recognized by their Greek parents (or direct descendants). This means birth certificates must list the father/mother correctly.',
+            'process.req_civil_records': '📋 <strong>Complete Civil Records:</strong> All births and marriages in your line of descent (from the Greek ancestor to you) must be properly registered. Missing any registration can make the process more complex or impossible.',
+            'process.eligibility_notice': '<p style="margin: 0; font-weight: 600; color: var(--primary-color);">💡 Every Case is Unique!</p><p style="margin-top: 10px; font-size: 0.95rem;">Eligibility rules can be complex, especially when involving female ancestors or multiple generations. Our specialized consultation can evaluate your specific case and determine exactly which documents you need and if there are any obstacles in your process.</p>',
             'requirements.title': '📄 Main Requirements and Documents',
             'requirements.basic_docs': '📝 Essential Documents Required',
             'requirements.doc1': '👶 <strong>Birth certificates</strong> - For all descendants in the line to the Greek ancestor',
@@ -1027,7 +1045,7 @@
             'requirements.doc6': '✔️ <strong>Apostille certification</strong> - Documents must be apostilled according to the Hague Convention',
             'requirements.note': '<strong>Important:</strong> Each case is unique and may require specific additional documents. The order and sequence of documents are crucial for process success.',
             'timeline.title': '⏳ Typical Process Timeline',
-            'timeline.content': '<p><strong>📅 Phase 1: Preparation (3-6 months)</strong></p><ul><li>Locating and obtaining civil certificates</li><li>Research of Greek ancestor documentation</li><li>Certified translation of all documents</li><li>Apostille certification via Hague Convention</li></ul><p><strong>📤 Phase 2: Submission (1-2 months)</strong></p><ul><li>Greek consulate appointment scheduling</li><li>Complete documentation submission</li><li>Consular fees payment</li></ul><p><strong>🇬🇷 Phase 3: Greek Analysis (12-36 months)</strong></p><ul><li>Document submission for analysis in Greece</li><li>Registration in Greek municipal archives</li><li>Greek certificate issuance</li></ul><p><strong>✅ Phase 4: Finalization (1-3 months)</strong></p><ul><li>Obtaining protocol number (AMKA)</li><li>European passport application</li></ul>',
+            'timeline.content': '<p><strong>📅 Phase 1: Preparation (3-6 months) - THE MOST CRITICAL PHASE!</strong></p><ul><li>Locating and obtaining civil certificates</li><li>Research of Greek ancestor documentation</li><li>Certified translation of all documents</li><li>Apostille certification via Hague Convention</li></ul><p style="font-style: italic; color: var(--secondary-color); margin-top: 10px;">⚡ <strong>Important:</strong> If all documents are properly raised and requested in this phase, the following stages will be much faster and without complications!</p><p><strong>📤 Phase 2: Submission (varies by consulate)</strong></p><ul><li>Greek consulate appointment scheduling</li><li>Complete documentation submission</li><li>Consular fees payment</li></ul><p style="font-size: 0.9rem; margin-top: 5px;"><em>✔️ Correct documentation in Phase 1 = Immediate acceptance by the consulate, no rework needed.</em></p><p><strong>🇬🇷 Phase 3: Greek Analysis (varies by municipality / notary / register offices)</strong></p><ul><li>Document submission for analysis in Greece</li><li>Registration in Greek municipal archives</li><li>Greek certificate issuance</li></ul><p style="font-size: 0.9rem; margin-top: 5px;"><em>✔️ Well-prepared documents = Faster processing, no requests for additional documentation.</em></p><p><strong>✅ Phase 4: Finalization (varies by authorities)</strong></p><ul><li>European passport application</li></ul><p style="font-size: 0.9rem; margin-top: 5px;"><em>✔️ Process done right from the start = Quick finalization without surprises.</em></p><div style="margin-top: 15px; padding: 15px; background: rgba(13, 71, 161, 0.1); border-radius: 8px;"><p style="margin: 0; font-weight: 600; color: var(--primary-color);">⚡ Total Time for Phases 2, 3 & 4:</p><p style="margin-top: 8px; font-size: 0.95rem;">When everything is prepared correctly in <strong>Phase 1</strong>, each registration in phases 2, 3, and 4 typically takes <strong>between 1-3 months</strong>. <strong>In the case of retroactive processes</strong> (multiple generations), each generation needs to be registered sequentially, so the total time will be multiplied by the number of generations involved. The timeline varies depending on the specific consulate, municipality in Greece, and authorities involved.</p></div>',
             'timeline.consultancy_notice': '<p style="margin: 0; font-weight: 600; color: var(--secondary-color);">⚡ With Expert Consultation, You Can Significantly Reduce These Timelines!</p><p style="margin-top: 10px; font-size: 0.95rem;">Common documentation errors, incorrect procedural order, and lack of knowledge about specific requirements can add <strong>months or even years</strong> to the process. Our professional guidance helps you avoid these pitfalls from the start, saving time and ensuring everything is done correctly the first time.</p>',
             'benefits.title': '🌟 Why Acquire Greek Citizenship? Discover the Exclusive Benefits!',
             'benefits.eu': '🇪🇺 <strong>European Citizenship:</strong> Right to live, work, and study in any European Union country.',
@@ -1042,10 +1060,8 @@
             'consultation.title': '💬 Personalized Greek Citizenship Consultation',
             'consultation.description': 'We offer a <strong>1-hour</strong> consultation session to evaluate your specific case, identify necessary documents, and provide clear guidance on the Greek citizenship process. Our consultation is focused on delivering maximum value in a single productive session.',
             'consultation.cta': '<strong>Click the button below to access our calendar and schedule your paid consultation session.</strong>',
-            'plan.title': 'Specialized Consultation',
-            'plan.price': '$149 USD',
-            'plan.description': 'Personalized analysis of your eligibility, identification of necessary documents, and detailed guidance to start your Greek citizenship process. 1-hour session with a specialist.',
-            'plan.button': 'Schedule Consultation',
+            'consultation.payment_info': '<p style="margin: 0; font-weight: 600; color: var(--secondary-color);">💳 Payment Information</p><p style="margin-top: 12px; font-size: 0.95rem; line-height: 1.7;">As our consultancy is <strong>global</strong>, all payments are processed in <strong>US dollars (USD)</strong> via <strong>PayPal</strong>. When scheduling your session, you will need to have a PayPal account (or create one for free). PayPal will automatically convert the amount to your local currency in most countries, using the current exchange rate.</p>',
+            'consultation.button': 'Schedule Consultation',
             'legal.disclaimer': '<strong>Notice:</strong> Greek Citizenship is a <strong>private and independent advisory service</strong>. We provide documentary guidance and preparation for official procedures. We <strong>do not</strong> represent the Consulate or the Greek Government, nor do we have any affiliation with public bodies. Recognition of citizenship and issuance of documents depend exclusively on the analysis and decision of competent authorities.',
             'footer.copyright': '© 2026 Greek Citizenship Advisory - Independent Consultation. All rights reserved'
          }
@@ -1082,16 +1098,9 @@
       // Update pricing and Calendly link based on country
       function updatePricingByCountry(countryCode) {
          const isBrazil = countryCode === 'BR';
-         const price = isBrazil ? '$99 USD' : '$149 USD';
          const calendlyLink = isBrazil
             ? 'https://calendly.com/cidadaniagrega/passo-a-passo'
             : 'https://calendly.com/cidadaniagrega/step-by-step';
-
-         // Update price in DOM
-         const priceElement = document.querySelector('.price');
-         if (priceElement) {
-            priceElement.textContent = price;
-         }
 
          // Update Calendly link
          const calendlyButton = document.querySelector('a[href*="calendly.com"]');
@@ -1101,7 +1110,6 @@
 
          // Store for future use
          localStorage.setItem('userCountry', countryCode);
-         localStorage.setItem('consultationPrice', price);
          localStorage.setItem('calendlyLink', calendlyLink);
 
          // Update Instagram visibility based on detected country
