@@ -1402,7 +1402,10 @@
             const message = document.getElementById('wa-message').value.trim();
             if (!name || !country || !phone || !message) return;
             const fullNumber = country + phone.replace(/\D/g, '');
-            const text = encodeURIComponent(`Hello! My name is ${name}. My number is ${country} ${phone}.\n${message}`);
+            const currentLang = localStorage.getItem('preferredLanguage') || detectLanguage();
+            const template = (translations[currentLang] && translations[currentLang]['wa.message.template']) || translations['en-US']['wa.message.template'];
+            const formattedMessage = template.replace('{name}', name).replace('{country}', country).replace('{phone}', phone).replace('{message}', message);
+            const text = encodeURIComponent(formattedMessage);
             const waUrl = `https://wa.me/5561981902821?text=${text}`;
             window.open(waUrl, '_blank');
             waModal.style.display = 'none';
@@ -1886,6 +1889,23 @@ El objetivo de este proyecto es simple: <b>claridad, orientación y autonomía</
          'wa.message.placeholder': 'Comment pouvons-nous vous aider ?',
          'wa.send': 'Envoyer via WhatsApp'
       });
+      // Country detection fallback phrase translations
+      Object.assign(translations['en-US'], {
+         'country.detect.fallback': 'Country detection failed, using browser language fallback',
+         'wa.message.template': 'Hello! My name is {name}. My number is {country} {phone}.\n\n{message}'
+      });
+      Object.assign(translations['pt-BR'], {
+         'country.detect.fallback': 'Falha na detecção do país, usando idioma do navegador como alternativa',
+         'wa.message.template': 'Olá! Meu nome é {name}. Meu número é {country} {phone}.\n\n{message}'
+      });
+      Object.assign(translations['es-ES'], {
+         'country.detect.fallback': 'No se pudo detectar el país, usando el idioma del navegador como alternativa',
+         'wa.message.template': 'Hola! Mi nombre es {name}. Mi número es {country} {phone}.\n\n{message}'
+      });
+      Object.assign(translations['fr-FR'], {
+         'country.detect.fallback': "Échec de la détection du pays, utilisation de la langue du navigateur comme alternative",
+         'wa.message.template': 'Bonjour! Je m\'appelle {name}. Mon numéro est {country} {phone}.\n\n{message}'
+      });
 
       // Detect browser language
       function detectLanguage() {
@@ -1912,7 +1932,7 @@ El objetivo de este proyecto es simple: <b>claridad, orientación y autonomía</
             updatePricingByCountry(countryCode);
          } catch (error) {
             // Fallback: check if browser language suggests Brazil
-            console.log('Country detection failed, using browser language fallback');
+            console.log(translations[detectLanguage()]['country.detect.fallback'] || 'Country detection failed, using browser language fallback');
             const userLang = navigator.language || navigator.userLanguage;
             const countryCode = userLang.toLowerCase().includes('br') ? 'BR' : 'US';
             updatePricingByCountry(countryCode);
