@@ -2929,9 +2929,15 @@ El objetivo de este proyecto es simple: <b>claridad, orientación y autonomía</
             calendlyButton.href = calendlyLink;
          }
 
-         // Show/hide triage Calendly buttons by country
-         document.querySelectorAll('.triage-br').forEach(el => el.style.display = isBrazil ? 'inline-flex' : 'none');
-         document.querySelectorAll('.triage-other').forEach(el => el.style.display = isBrazil ? 'none' : 'inline-flex');
+         // Show/hide triage Calendly buttons by country and set correct URLs
+         document.querySelectorAll('.triage-br').forEach(el => {
+            el.style.display = isBrazil ? 'inline-flex' : 'none';
+            el.href = 'https://calendly.com/cidadaniagrega/triagem-inicial';
+         });
+         document.querySelectorAll('.triage-other').forEach(el => {
+            el.style.display = isBrazil ? 'none' : 'inline-flex';
+            el.href = 'https://calendly.com/cidadaniagrega/initial-triage';
+         });
 
          // Store for future use
          localStorage.setItem('userCountry', countryCode);
