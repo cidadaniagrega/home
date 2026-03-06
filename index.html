@@ -96,135 +96,109 @@
          transition: background-color 0.3s ease, color 0.3s ease;
       }
 
+      /* ===== HEADER / NAVBAR ===== */
       header {
          background: linear-gradient(135deg, var(--primary-color) 0%, var(--tertiary-color) 100%);
          color: white;
-         padding: 40px 20px 35px;
-         text-align: center;
-         box-shadow: 0 4px 20px rgba(13, 71, 161, 0.3);
-         position: relative;
+         position: sticky;
+         top: 0;
+         z-index: 1000;
+         box-shadow: 0 2px 20px rgba(13, 71, 161, 0.25);
+         transition: box-shadow 0.3s ease;
          overflow: hidden;
+      }
+
+      header.scrolled {
+         box-shadow: 0 4px 32px rgba(13, 71, 161, 0.45);
       }
 
       header::before {
          content: '';
          position: absolute;
-         top: 0;
-         left: 0;
-         right: 0;
-         bottom: 0;
+         top: 0; left: 0; right: 0; bottom: 0;
          background: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
-         opacity: 0.4;
+         opacity: 0.35;
          z-index: 0;
       }
 
-      header>* {
-         position: relative;
-         z-index: 1;
-      }
+      header > * { position: relative; z-index: 1; }
 
-      header h1 {
-         font-weight: 700;
-         font-size: 2.2rem;
-         margin-bottom: 8px;
-         text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-         letter-spacing: -0.5px;
-      }
-
-      .header-subtitle {
-         font-size: 0.95rem;
-         opacity: 0.95;
-         font-weight: 400;
-         margin-bottom: 20px;
-         letter-spacing: 0.3px;
-      }
-
-      .header-links {
-         display: flex;
-         justify-content: center;
-         gap: 30px;
-         flex-wrap: wrap;
-         margin-top: 20px;
-      }
-
-      .link-item {
+      /* Top bar */
+      .header-top {
          display: flex;
          align-items: center;
-         gap: 8px;
+         justify-content: space-between;
+         padding: 13px 28px;
+         gap: 16px;
       }
 
-      .header-links a {
-         color: #fff;
+      .header-brand {
+         display: flex;
+         align-items: center;
+         gap: 12px;
          text-decoration: none;
-         font-weight: 500;
-         transition: all 0.3s ease;
+         color: white;
+         flex-shrink: 1;
+         min-width: 0;
+      }
+
+      .header-logo {
+         width: 52px;
+         height: 52px;
+         border-radius: 12px;
+         box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+         flex-shrink: 0;
+      }
+
+      .header-brand-text {
+         display: flex;
+         flex-direction: column;
+         min-width: 0;
+      }
+
+      .header-brand-name {
+         font-weight: 700;
+         font-size: 1.25rem;
+         margin: 0;
+         line-height: 1.3;
+         letter-spacing: -0.3px;
+         text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+         white-space: nowrap;
+         overflow: hidden;
+         text-overflow: ellipsis;
+      }
+
+      .header-brand-sub {
+         font-size: 0.82rem;
+         opacity: 0.85;
+         margin: 0;
+         letter-spacing: 0.2px;
+         line-height: 1.4;
+         white-space: nowrap;
+         overflow: hidden;
+         text-overflow: ellipsis;
+      }
+
+      .header-controls {
          display: flex;
          align-items: center;
-         gap: 8px;
-      }
-
-      .header-links a:visited {
-         color: #fff;
-      }
-
-      body.dark-mode .header-links a:visited {
-         color: #E0E0E0;
-      }
-
-      .header-links a:hover {
-         color: var(--secondary-color);
-         transform: translateY(-2px);
-      }
-
-      .header-links .icon {
-         width: 18px;
-         height: 18px;
-      }
-
-      .dark-mode-container {
-         position: absolute;
-         top: 20px;
-         left: 20px;
-         z-index: 100;
+         gap: 12px;
+         flex-shrink: 0;
       }
 
       .language-selector {
-         position: absolute;
-         top: 20px;
-         right: 20px;
          display: flex;
-         gap: 10px;
+         gap: 6px;
          align-items: center;
-         z-index: 100;
-      }
-
-      .dark-mode-toggle {
-         cursor: pointer;
-         width: 40px;
-         height: 40px;
-         border-radius: 50%;
-         background: rgba(255, 255, 255, 0.2);
-         border: 2px solid rgba(255, 255, 255, 0.3);
-         display: flex;
-         align-items: center;
-         justify-content: center;
-         font-size: 1.2rem;
-         transition: all 0.3s ease;
-         backdrop-filter: blur(10px);
-      }
-
-      .dark-mode-toggle:hover {
-         background: rgba(255, 255, 255, 0.3);
-         transform: scale(1.1);
-         box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
       }
 
       .lang-flag {
          cursor: pointer;
-         font-size: 2rem;
-         transition: all 0.3s ease;
-         filter: grayscale(50%);
-         opacity: 0.7;
+         font-size: 1.55rem;
+         transition: all 0.25s ease;
+         filter: grayscale(55%);
+         opacity: 0.65;
+         line-height: 1;
       }
 
       .lang-flag:hover {
@@ -237,9 +211,82 @@
          filter: grayscale(0%);
          opacity: 1;
          transform: scale(1.1);
-         box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-         border-radius: 4px;
+         filter: drop-shadow(0 0 5px rgba(255,255,255,0.7));
       }
+
+      .dark-mode-toggle {
+         cursor: pointer;
+         width: 36px;
+         height: 36px;
+         border-radius: 50%;
+         background: rgba(255,255,255,0.18);
+         border: 1px solid rgba(255,255,255,0.3);
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         font-size: 1rem;
+         transition: all 0.3s ease;
+         backdrop-filter: blur(10px);
+      }
+
+      .dark-mode-toggle:hover {
+         background: rgba(255,255,255,0.3);
+         transform: scale(1.1);
+         box-shadow: 0 0 14px rgba(255,255,255,0.4);
+      }
+
+      /* Contact bar */
+      .header-bottom {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         gap: 8px;
+         padding: 7px 28px 9px;
+         border-top: 1px solid rgba(255,255,255,0.15);
+         flex-wrap: wrap;
+      }
+
+      .header-pill {
+         display: inline-flex;
+         align-items: center;
+         gap: 5px;
+         background: rgba(255,255,255,0.16);
+         border: 1px solid rgba(255,255,255,0.28);
+         color: white;
+         text-decoration: none;
+         padding: 4px 13px;
+         border-radius: 20px;
+         font-size: 0.78rem;
+         font-weight: 600;
+         transition: all 0.2s ease;
+         backdrop-filter: blur(4px);
+      }
+
+      .header-pill:hover {
+         background: rgba(255,255,255,0.28);
+         transform: translateY(-1px);
+         color: white;
+         box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      }
+
+      .header-sep {
+         color: rgba(255,255,255,0.3);
+         font-size: 0.9rem;
+         padding: 0 2px;
+      }
+
+      .header-contact-link {
+         display: inline-flex;
+         align-items: center;
+         gap: 5px;
+         color: rgba(255,255,255,0.82);
+         text-decoration: none;
+         font-size: 0.78rem;
+         transition: color 0.2s ease;
+      }
+
+      .header-contact-link:hover { color: white; }
+      .header-contact-link svg { flex-shrink: 0; }
 
       main {
          max-width: 1100px;
@@ -612,27 +659,39 @@
       }
 
       @media (max-width: 768px) {
-         .dark-mode-container {
-            top: 10px;
-            left: 10px;
+         .header-top {
+            padding: 9px 16px;
          }
 
-         .language-selector {
-            top: 10px;
-            right: 10px;
+         .header-logo {
+            width: 40px;
+            height: 40px;
+         }
+
+         .header-brand-name {
+            font-size: 1rem;
+         }
+
+         .header-brand-sub {
+            display: none;
          }
 
          .lang-flag {
-            font-size: 1.5rem;
+            font-size: 1.35rem;
          }
 
-         header h1 {
-            font-size: 1.5rem;
-            padding: 0 60px;
+         .header-bottom {
+            padding: 6px 16px 8px;
+            gap: 6px;
          }
 
-         .header-subtitle {
-            font-size: 0.85rem;
+         .header-pill {
+            font-size: 0.72rem;
+            padding: 3px 10px;
+         }
+
+         .header-contact-link {
+            font-size: 0.72rem;
          }
 
          .hero-section {
@@ -671,61 +730,699 @@
             font-size: 1rem;
          }
       }
+
+      /* ===== HERO STORY LINE ===== */
+      .hero-story-line {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         gap: 12px;
+         margin: 20px auto 25px;
+         padding: 14px 24px;
+         background: rgba(255, 255, 255, 0.85);
+         border-radius: 50px;
+         max-width: 640px;
+         box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      body.dark-mode .hero-story-line {
+         background: rgba(255, 255, 255, 0.12);
+      }
+
+      .hero-story-line img {
+         width: 40px;
+         height: 40px;
+         border-radius: 50%;
+         object-fit: cover;
+         border: 2px solid var(--secondary-color);
+         flex-shrink: 0;
+      }
+
+      .hero-story-line span {
+         font-size: 0.92rem;
+         color: var(--text-primary);
+         font-weight: 500;
+         text-align: left;
+         line-height: 1.4;
+      }
+
+      /* ===== FUNNEL SECTION ===== */
+      .funnel-section {
+         background: var(--surface-color);
+         border-radius: 20px;
+         padding: 50px 45px;
+         margin-bottom: 50px;
+         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+         text-align: center;
+      }
+
+      .funnel-section > h2 {
+         color: var(--primary-color);
+         font-size: 1.8rem;
+         font-weight: 700;
+         margin-bottom: 10px;
+      }
+
+      .funnel-section > p {
+         color: var(--text-secondary);
+         font-size: 1.05rem;
+         margin-bottom: 35px;
+      }
+
+      .funnel-grid {
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+         gap: 24px;
+      }
+
+      .funnel-card {
+         border-radius: 16px;
+         padding: 30px 25px;
+         text-align: left;
+         border: 2px solid transparent;
+         transition: all 0.3s ease;
+      }
+
+      .funnel-card.green {
+         background: rgba(76, 175, 80, 0.06);
+         border-color: #4CAF50;
+      }
+
+      .funnel-card.yellow {
+         background: rgba(255, 152, 0, 0.06);
+         border-color: var(--secondary-color);
+      }
+
+      .funnel-card:hover {
+         transform: translateY(-3px);
+         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+      }
+
+      .funnel-card h3 {
+         font-size: 1.15rem;
+         font-weight: 700;
+         margin-bottom: 12px;
+         color: var(--text-primary);
+      }
+
+      .funnel-card > p {
+         font-size: 0.95rem;
+         color: var(--text-secondary);
+         line-height: 1.6;
+         margin-bottom: 14px;
+      }
+
+      .funnel-card ul {
+         list-style: none;
+         padding: 0;
+         margin: 0 0 22px 0;
+      }
+
+      .funnel-card ul li {
+         font-size: 0.92rem;
+         color: var(--text-secondary);
+         padding: 5px 0 5px 18px;
+         position: relative;
+      }
+
+      .funnel-card ul li::before {
+         content: '→';
+         position: absolute;
+         left: 0;
+         color: var(--text-secondary);
+      }
+
+      .funnel-cta-green {
+         display: block;
+         background: linear-gradient(135deg, #43A047, #66BB6A);
+         color: white;
+         padding: 14px 20px;
+         border-radius: 10px;
+         font-weight: 600;
+         text-decoration: none;
+         font-size: 1rem;
+         text-align: center;
+         transition: all 0.3s ease;
+         box-shadow: 0 4px 12px rgba(67, 160, 71, 0.3);
+      }
+
+      .funnel-cta-green:hover {
+         transform: translateY(-2px);
+         box-shadow: 0 6px 16px rgba(67, 160, 71, 0.4);
+         color: white;
+      }
+
+      .funnel-cta-yellow {
+         display: inline-flex;
+         align-items: center;
+         background: linear-gradient(135deg, var(--secondary-color), #FF8F00);
+         color: white;
+         padding: 14px 20px;
+         border-radius: 10px;
+         font-weight: 600;
+         text-decoration: none;
+         font-size: 1rem;
+         text-align: center;
+         transition: all 0.3s ease;
+         box-shadow: 0 4px 12px rgba(255, 111, 0, 0.3);
+      }
+
+      .funnel-cta-yellow:hover {
+         transform: translateY(-2px);
+         box-shadow: 0 6px 16px rgba(255, 111, 0, 0.4);
+         color: white;
+      }
+
+      /* ===== SOCIAL PROOF SECTION ===== */
+      .social-proof-section {
+         background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
+         border-radius: 20px;
+         padding: 40px 45px;
+         margin-bottom: 50px;
+         color: white;
+         text-align: center;
+      }
+
+      .social-proof-section h2 {
+         font-size: 1.4rem;
+         font-weight: 700;
+         margin-bottom: 30px;
+         opacity: 0.95;
+      }
+
+      .stats-grid {
+         display: grid;
+         grid-template-columns: repeat(3, 1fr);
+         gap: 20px;
+      }
+
+      .stat-item {
+         padding: 20px;
+         background: rgba(255, 255, 255, 0.12);
+         border-radius: 12px;
+         backdrop-filter: blur(10px);
+      }
+
+      .stat-number {
+         font-size: 2.2rem;
+         font-weight: 700;
+         display: block;
+         margin-bottom: 6px;
+      }
+
+      .stat-label {
+         font-size: 0.9rem;
+         opacity: 0.85;
+      }
+
+      /* ===== SIGNS SECTION ===== */
+      .signs-section {
+         background: var(--surface-color);
+         border-radius: 20px;
+         padding: 50px 45px;
+         margin-bottom: 50px;
+         text-align: center;
+         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+         border: 1px solid rgba(13, 71, 161, 0.1);
+      }
+
+      .signs-section > h2 {
+         color: var(--primary-color);
+         font-size: 1.8rem;
+         font-weight: 700;
+         margin-bottom: 30px;
+      }
+
+      .signs-list {
+         list-style: none;
+         padding: 0;
+         margin: 0 auto 20px;
+         max-width: 620px;
+         text-align: left;
+      }
+
+      .signs-list li {
+         padding: 12px 18px;
+         margin-bottom: 10px;
+         background: rgba(13, 71, 161, 0.05);
+         border-radius: 10px;
+         border-left: 3px solid var(--primary-color);
+         font-size: 1.02rem;
+         color: var(--text-primary);
+      }
+
+      .signs-subtitle {
+         color: var(--text-secondary);
+         font-size: 1.05rem;
+         margin-bottom: 28px;
+         font-style: italic;
+      }
+
+      .signs-cta {
+         display: inline-block;
+         background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
+         color: white;
+         padding: 16px 36px;
+         border-radius: 12px;
+         font-weight: 600;
+         font-size: 1.1rem;
+         text-decoration: none;
+         transition: all 0.3s ease;
+         box-shadow: 0 4px 15px rgba(13, 71, 161, 0.3);
+      }
+
+      .signs-cta:hover {
+         transform: translateY(-2px);
+         box-shadow: 0 6px 20px rgba(13, 71, 161, 0.4);
+         color: white;
+      }
+
+      /* ===== EMOTIONAL SECTION ===== */
+      .emotional-section {
+         background: linear-gradient(135deg, rgba(13, 71, 161, 0.06) 0%, rgba(255, 111, 0, 0.06) 100%);
+         border-radius: 20px;
+         padding: 50px 60px;
+         margin-bottom: 50px;
+         text-align: center;
+         border: 1px solid rgba(13, 71, 161, 0.1);
+      }
+
+      .emotional-section blockquote {
+         font-size: 1.5rem;
+         font-weight: 700;
+         color: var(--primary-color);
+         line-height: 1.5;
+         margin: 0 auto 20px;
+         max-width: 750px;
+         font-style: italic;
+      }
+
+      .emotional-section > p {
+         font-size: 1.1rem;
+         color: var(--text-secondary);
+         max-width: 700px;
+         margin: 0 auto;
+         line-height: 1.8;
+      }
+
+      /* ===== FINAL CTA SECTION ===== */
+      .final-cta-section {
+         background: var(--surface-color);
+         border-radius: 20px;
+         padding: 50px 45px;
+         margin-bottom: 50px;
+         text-align: center;
+         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+         border: 2px solid rgba(13, 71, 161, 0.12);
+      }
+
+      .final-cta-section h2 {
+         color: var(--primary-color);
+         font-size: 1.9rem;
+         font-weight: 700;
+         margin-bottom: 12px;
+      }
+
+      .final-cta-section > p {
+         color: var(--text-secondary);
+         font-size: 1.05rem;
+         margin-bottom: 35px;
+      }
+
+      .final-cta-buttons {
+         display: flex;
+         gap: 20px;
+         justify-content: center;
+         flex-wrap: wrap;
+      }
+
+      .final-cta-cards {
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+         gap: 24px;
+         margin-top: 36px;
+         text-align: left;
+      }
+
+      .final-cta-card {
+         background: var(--background-color);
+         border-radius: 16px;
+         padding: 28px 24px;
+         border: 2px solid transparent;
+         display: flex;
+         flex-direction: column;
+      }
+
+      .final-cta-card.triage { border-color: #E3F2FD; }
+      .final-cta-card.app    { border-color: var(--secondary-color); }
+      .final-cta-card.consult{ border-color: var(--primary-color); }
+
+      .final-cta-card-tag {
+         display: inline-block;
+         font-size: 0.75rem;
+         font-weight: 700;
+         text-transform: uppercase;
+         letter-spacing: 0.05em;
+         padding: 4px 12px;
+         border-radius: 20px;
+         margin-bottom: 14px;
+         align-self: flex-start;
+      }
+
+      .final-cta-card.triage  .final-cta-card-tag { background: #E3F2FD; color: var(--primary-color); }
+      .final-cta-card.app     .final-cta-card-tag { background: rgba(255,111,0,0.12); color: var(--secondary-color); }
+      .final-cta-card.consult .final-cta-card-tag { background: rgba(13,71,161,0.1); color: var(--primary-color); }
+
+      .final-cta-card h3 {
+         font-size: 1.15rem;
+         font-weight: 700;
+         margin-bottom: 10px;
+         color: var(--text-primary);
+      }
+
+      .final-cta-card > p {
+         font-size: 0.92rem;
+         color: var(--text-secondary);
+         margin-bottom: 16px;
+         line-height: 1.6;
+      }
+
+      .final-cta-card ul {
+         list-style: none;
+         padding: 0;
+         margin: 0 0 20px 0;
+         flex: 1;
+      }
+
+      .final-cta-card ul li {
+         font-size: 0.9rem;
+         color: var(--text-secondary);
+         padding: 5px 0;
+      }
+
+      .final-cta-card .card-btns {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 10px;
+         margin-top: auto;
+         justify-content: center;
+      }
+
+      .final-cta-combine {
+         margin-top: 32px;
+         padding: 18px 24px;
+         background: rgba(13,71,161,0.05);
+         border-radius: 12px;
+         font-size: 0.95rem;
+         color: var(--text-secondary);
+         border-left: 4px solid var(--primary-color);
+         text-align: left;
+      }
+
+      .triage-toggle {
+         background: none;
+         border: 1px solid var(--primary-color);
+         border-radius: 8px;
+         cursor: pointer;
+         font-size: 0.82rem;
+         color: var(--primary-color);
+         padding: 7px 14px;
+         font-weight: 600;
+         width: 100%;
+         margin: 10px 0 4px;
+         text-align: center;
+         transition: background 0.2s;
+      }
+
+      .triage-toggle:hover {
+         background: rgba(13,71,161,0.06);
+      }
+
+      .triage-details {
+         display: none;
+         margin-top: 6px;
+         padding-top: 14px;
+         border-top: 1px solid rgba(13,71,161,0.15);
+         font-size: 0.85rem;
+         line-height: 1.65;
+         color: var(--text-secondary);
+      }
+
+      .triage-details ul {
+         padding-left: 18px;
+         margin: 6px 0 12px;
+      }
+
+      .triage-details li {
+         margin-bottom: 4px;
+      }
+
+      .triage-details .triage-step {
+         margin-bottom: 10px;
+      }
+
+      .btn-blue {
+         background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
+         color: white;
+         padding: 18px 36px;
+         border-radius: 12px;
+         font-weight: 600;
+         font-size: 1.1rem;
+         text-decoration: none;
+         transition: all 0.3s ease;
+         box-shadow: 0 4px 15px rgba(13, 71, 161, 0.3);
+         display: inline-block;
+      }
+
+      .btn-blue:hover {
+         transform: translateY(-2px);
+         box-shadow: 0 6px 20px rgba(13, 71, 161, 0.4);
+         color: white;
+      }
+
+      /* ===== APP STORE BUTTONS ===== */
+      .app-links-group {
+         display: flex;
+         gap: 10px;
+         flex-wrap: wrap;
+      }
+
+      .app-btn-ios,
+      .app-btn-android {
+         display: inline-flex;
+         align-items: center;
+         gap: 7px;
+         padding: 11px 18px;
+         border-radius: 10px;
+         font-weight: 600;
+         text-decoration: none;
+         font-size: 0.92rem;
+         transition: all 0.3s ease;
+      }
+
+      .app-btn-ios {
+         background: #1a1a1a;
+         color: white;
+         box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .app-btn-ios:hover {
+         transform: translateY(-2px);
+         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+         color: white;
+      }
+
+      .app-btn-android {
+         background: linear-gradient(135deg, #01875f, #00a878);
+         color: white;
+         box-shadow: 0 3px 10px rgba(1, 135, 95, 0.3);
+      }
+
+      .app-btn-android:hover {
+         transform: translateY(-2px);
+         box-shadow: 0 5px 15px rgba(1, 135, 95, 0.4);
+         color: white;
+      }
+
+      /* ===== RESPONSIVE ADDITIONS ===== */
+      @media (max-width: 768px) {
+         .funnel-grid {
+            grid-template-columns: 1fr;
+         }
+
+         .stats-grid {
+            grid-template-columns: 1fr;
+            gap: 12px;
+         }
+
+         .final-cta-buttons {
+            flex-direction: column;
+            align-items: center;
+         }
+
+         .emotional-section {
+            padding: 40px 25px;
+         }
+
+         .signs-section {
+            padding: 40px 25px;
+         }
+
+         .funnel-section {
+            padding: 40px 25px;
+         }
+
+         .social-proof-section {
+            padding: 30px 25px;
+         }
+
+         .hero-story-line {
+            flex-direction: column;
+            text-align: center;
+            border-radius: 16px;
+            padding: 16px 20px;
+         }
+
+         .hero-story-line span {
+            text-align: center;
+         }
+      }
    </style>
 </head>
 
 <body>
-   <header>
-      <div class="dark-mode-container">
-         <button class="dark-mode-toggle" id="darkModeToggle" title="Toggle Dark Mode" aria-label="Toggle Dark Mode">
-            <span id="darkModeIcon">🌙</span>
-         </button>
+   <header id="site-header">
+      <!-- Top bar: brand left · controls right -->
+      <div class="header-top">
+         <a href="#" class="header-brand" aria-label="Cidadania Grega">
+            <img src="icon.png" alt="Logo" class="header-logo" />
+            <div class="header-brand-text">
+               <h1 class="header-brand-name" data-i18n="header.title">Cidadania Grega para Descendentes</h1>
+               <p class="header-brand-sub" data-i18n="header.subtitle">🇬🇷 Assessoria Especializada em Cidadania Europeia por Descendência</p>
+            </div>
+         </a>
+         <div class="header-controls">
+            <div class="language-selector">
+               <span class="lang-flag" data-lang="en-US" title="English">🇺🇸</span>
+               <span class="lang-flag" data-lang="pt-BR" title="Português">🇧🇷</span>
+               <span class="lang-flag" data-lang="fr-FR" title="Français">🇫🇷</span>
+               <span class="lang-flag" data-lang="es-ES" title="Español">🇪🇸</span>
+            </div>
+            <button class="dark-mode-toggle" id="darkModeToggle" title="Toggle Dark Mode" aria-label="Toggle Dark Mode">
+               <span id="darkModeIcon">🌙</span>
+            </button>
+         </div>
       </div>
-      <div class="language-selector">
-         <span class="lang-flag" data-lang="en-US" title="English">🇺🇸</span>
-         <span class="lang-flag" data-lang="pt-BR" title="Português">🇧🇷</span>
-         <span class="lang-flag" data-lang="fr-FR" title="Français">🇫🇷</span>
-         <span class="lang-flag" data-lang="es-ES" title="Español">🇪🇸</span>
-      </div>
-      <h1 data-i18n="header.title">Cidadania Grega para Descendentes</h1>
-      <p class="header-subtitle" data-i18n="header.subtitle">🇬🇷 Assessoria Especializada em Cidadania Europeia por
-         Descendência</p>
-      <div class="header-links">
-         <div class="link-item">
-            <img src="icon.png" alt="iOS App Icon"
-               style="width:32px;height:32px;margin-right:8px;vertical-align:middle;" />
-            <a href="https://apps.apple.com/app/id6759114726" target="_blank" rel="noopener noreferrer"
-               style="font-weight:bold;" data-i18n="ios.app.link">Download our iOS App!</a>
-         </div>
-         <div class="link-item">
-            <img src="icon.png" alt="Android App Icon"
-               style="width:32px;height:32px;margin-right:8px;vertical-align:middle;" />
-            <a href="https://play.google.com/store/apps/details?id=com.cidadaniagrega.greekcitizenship&pcampaignid=web_share"
-               target="_blank" rel="noopener noreferrer" style="font-weight:bold;" data-i18n="android.app.link">Download
-               our Android App!</a>
-         </div>
-         <div class="link-item">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
-               <path fill="white"
-                  d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.346 3.608 1.322.975.976 1.26 2.243 1.322 3.608.058 1.266.07 1.645.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.346 2.633-1.322 3.608-.976.975-2.243 1.26-3.608 1.322-1.266.058-1.645.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.346-3.608-1.322-.975-.976-1.26-2.243-1.322-3.608C2.175 15.747 2.163 15.368 2.163 12s.012-3.584.07-4.85c.062-1.366.346-2.633 1.322-3.608.976-.975 2.243-1.26 3.608-1.322C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.013 7.052.072 5.771.13 4.632.443 3.678 1.398c-.954.954-1.267 2.093-1.325 3.374C2.013 5.668 2 6.077 2 9.335v5.33c0 3.259.013 3.668.072 4.948.058 1.281.371 2.42 1.325 3.374.954.954 2.093 1.267 3.374 1.325 1.28.059 1.689.072 4.948.072s3.668-.013 4.948-.072c1.281-.058 2.42-.371 3.374-1.325.954-.954 1.267-2.093 1.325-3.374.059-1.28.072-1.689.072-4.948v-5.33c0-3.259-.013-3.668-.072-4.948-.058-1.281-.371-2.42-1.325-3.374-.954-.954-2.093-1.267-3.374-1.325C15.668.013 15.259 0 12 0z" />
-               <path fill="white"
-                  d="M12 5.838A6.162 6.162 0 1 0 18.162 12 6.162 6.162 0 0 0 12 5.838zm0 10.162A4 4 0 1 1 16 12a4 4 0 0 1-4 4z" />
-               <circle fill="white" cx="18.406" cy="5.594" r="1.44" />
-            </svg>
-            <a href="https://www.instagram.com/cidadania.grega" target="_blank"
-               rel="noopener noreferrer">cidadania.grega</a>
-         </div>
-         <div class="link-item">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
-               <path fill="white"
-                  d="M12 12.713l-11.715-7.713h23.43L12 12.713zm-12-1.008v10.295h24V11.705l-12 7.994-12-7.994z" />
-            </svg>
-            <a href="mailto:contato@cidadaniagrega.com">contato@cidadaniagrega.com</a>
-         </div>
+      <!-- Contact bar: app pills · separator · social links -->
+      <div class="header-bottom">
+         <a href="https://apps.apple.com/app/id6759114726" target="_blank" rel="noopener noreferrer"
+            class="header-pill" data-i18n="ios.app.link">🍎 Baixe o app iOS!</a>
+         <a href="https://play.google.com/store/apps/details?id=com.cidadaniagrega.greekcitizenship&pcampaignid=web_share"
+            target="_blank" rel="noopener noreferrer"
+            class="header-pill" data-i18n="android.app.link">🤖 Baixe o app Android!</a>
+         <span class="header-sep">·</span>
+         <a href="https://www.instagram.com/cidadania.grega" target="_blank" rel="noopener noreferrer"
+            class="header-contact-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13" height="13"><path fill="white" d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.346 3.608 1.322.975.976 1.26 2.243 1.322 3.608.058 1.266.07 1.645.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.346 2.633-1.322 3.608-.976.975-2.243 1.26-3.608 1.322-1.266.058-1.645.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.346-3.608-1.322-.975-.976-1.26-2.243-1.322-3.608C2.175 15.747 2.163 15.368 2.163 12s.012-3.584.07-4.85c.062-1.366.346-2.633 1.322-3.608.976-.975 2.243-1.26 3.608-1.322C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.013 7.052.072 5.771.13 4.632.443 3.678 1.398c-.954.954-1.267 2.093-1.325 3.374C2.013 5.668 2 6.077 2 9.335v5.33c0 3.259.013 3.668.072 4.948.058 1.281.371 2.42 1.325 3.374.954.954 2.093 1.267 3.374 1.325 1.28.059 1.689.072 4.948.072s3.668-.013 4.948-.072c1.281-.058 2.42-.371 3.374-1.325.954-.954 1.267-2.093 1.325-3.374.059-1.28.072-1.689.072-4.948v-5.33c0-3.259-.013-3.668-.072-4.948-.058-1.281-.371-2.42-1.325-3.374-.954-.954-2.093-1.267-3.374-1.325C15.668.013 15.259 0 12 0z"/><path fill="white" d="M12 5.838A6.162 6.162 0 1 0 18.162 12 6.162 6.162 0 0 0 12 5.838zm0 10.162A4 4 0 1 1 16 12a4 4 0 0 1-4 4z"/><circle fill="white" cx="18.406" cy="5.594" r="1.44"/></svg>
+            cidadania.grega
+         </a>
+         <a href="mailto:contato@cidadaniagrega.com" class="header-contact-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13" height="13"><path fill="white" d="M12 12.713l-11.715-7.713h23.43L12 12.713zm-12-1.008v10.295h24V11.705l-12 7.994-12-7.994z"/></svg>
+            contato@cidadaniagrega.com
+         </a>
       </div>
    </header>
 
    <main>
+      <section class="hero-section scroll-animate">
+         <div class="hero-badge" data-i18n="hero.badge">✨ Consultoria Especializada</div>
+         <h2 data-i18n="hero.title">Descubra se Você Tem Direito ao Passaporte Europeu Através da Cidadania Grega</h2>
+         <div class="hero-story-line">
+            <img src="profile.jpeg" alt="Emmanuel Kiametis" />
+            <span data-i18n="hero.story.line">Sou neto de grego e conquistei a cidadania em menos de 1 ano — junto com meu pai e meus filhos.</span>
+         </div>
+         <p class="hero-subtitle" data-i18n="hero.subtitle">
+            Orientação profissional completa para reconhecer sua cidadania grega por descendência. Evite erros comuns e
+            economize anos no processo.
+         </p>
+         <div class="hero-cta-container">
+            <a href="#consultation" class="hero-cta" data-i18n="hero.cta">🗓️ Agendar Consultoria Personalizada</a>
+         </div>
+         <div class="trust-indicators">
+            <div class="trust-item">
+               <div class="icon-badge">🎯</div>
+               <div>
+                  <strong data-i18n="trust.accuracy">100%</strong>
+                  <span data-i18n="trust.accuracy_desc">Análise de Elegibilidade</span>
+               </div>
+            </div>
+            <div class="trust-item">
+               <div class="icon-badge">⚡</div>
+               <div>
+                  <strong data-i18n="trust.speed">Rápido</strong>
+                  <span data-i18n="trust.speed_desc">Resultados em 1 Hora</span>
+               </div>
+            </div>
+            <div class="trust-item">
+               <div class="icon-badge">🏆</div>
+               <div>
+                  <strong data-i18n="trust.expert">Especialista</strong>
+                  <span data-i18n="trust.expert_desc">Consultoria Personalizada</span>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <section class="funnel-section scroll-animate">
+         <h2 data-i18n="funnel.title">Em que situação você está?</h2>
+         <p data-i18n="funnel.subtitle">Escolha o caminho certo para avançar</p>
+         <div class="funnel-grid">
+            <div class="funnel-card green">
+               <h3 data-i18n="funnel.green.title">🟢 Já tenho documento grego</h3>
+               <p data-i18n="funnel.green.desc">Você já possui algum destes documentos do seu ancestral:</p>
+               <ul>
+                  <li data-i18n="funnel.green.doc1">Certificado do Registro Municipal (Dimotologio)</li>
+                  <li data-i18n="funnel.green.doc2">Registro Familiar (Oikogeneia)</li>
+                  <li data-i18n="funnel.green.doc3">Certidão de Nascimento Grega</li>
+                  <li data-i18n="funnel.green.doc4">Passaporte Grego</li>
+               </ul>
+               <a href="https://calendly.com/cidadaniagrega/passo-a-passo" target="_blank" rel="noopener noreferrer"
+                  class="funnel-cta-green calendly-pt" data-i18n="funnel.green.cta" lang="pt">
+                  📅 Agendar análise do processo
+               </a>
+               <a href="https://calendly.com/cidadaniagrega/step-by-step" target="_blank" rel="noopener noreferrer"
+                  class="funnel-cta-green calendly-other" data-i18n="funnel.green.cta" lang="en" style="display:none;">
+                  📅 Schedule Process Analysis
+               </a>
+            </div>
+            <div class="funnel-card yellow">
+               <h3 data-i18n="funnel.yellow.title">🟡 Não sei se tenho direito</h3>
+               <p data-i18n="funnel.yellow.desc">Você se identifica com estes pontos:</p>
+               <ul>
+                  <li data-i18n="funnel.yellow.item1">Não sabe se há registro na Grécia</li>
+                  <li data-i18n="funnel.yellow.item2">Não tem documentos gregos em mãos</li>
+                  <li data-i18n="funnel.yellow.item3">Quer confirmar elegibilidade antes de avançar</li>
+               </ul>
+               <p style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:10px;" data-i18n="funnel.yellow.cta">🔎 Fazer teste de elegibilidade:</p>
+               <div class="app-links-group" style="justify-content:center;">
+                  <a href="https://apps.apple.com/app/id6759114726" target="_blank" rel="noopener noreferrer"
+                     class="app-btn-ios">🍎 iOS</a>
+                  <a href="https://play.google.com/store/apps/details?id=com.cidadaniagrega.greekcitizenship&pcampaignid=web_share" target="_blank" rel="noopener noreferrer"
+                     class="app-btn-android">🤖 Android</a>
+                  <a href="https://calendly.com/cidadaniagrega/triagem-inicial" target="_blank" rel="noopener noreferrer"
+                     class="funnel-cta-yellow triage-br" data-i18n="funnel.yellow.triage.cta">
+                     📅 Agendar triagem inicial
+                  </a>
+                  <a href="https://calendly.com/cidadaniagrega/initial-triage" target="_blank" rel="noopener noreferrer"
+                     class="funnel-cta-yellow triage-other" data-i18n="funnel.yellow.triage.cta" style="display:none;">
+                     📅 Schedule initial triage
+                  </a>
+               </div>
+            </div>
+         </div>
+      </section>
+
+
       <section class="info-section scroll-animate" id="about-creator"
          style="display: flex; align-items: flex-start; gap: 24px;">
          <div style="flex-shrink:0;">
@@ -777,53 +1474,23 @@
             </div>
          </div>
       </section>
-      <section class="hero-section scroll-animate">
-         <div class="hero-badge" data-i18n="hero.badge">✨ Consultoria Especializada</div>
-         <h2 data-i18n="hero.title">Descubra se Você Tem Direito ao Passaporte Europeu Através da Cidadania Grega</h2>
-         <div style="margin-bottom:8px;">
-            <img src="icon.png" alt="iOS App Icon"
-               style="width:32px;height:32px;margin-right:8px;vertical-align:middle;" />
+
+      <section class="signs-section scroll-animate">
+         <h2 data-i18n="signs.title">5 sinais de que você pode ter cidadania grega 🇬🇷</h2>
+         <ul class="signs-list">
+            <li data-i18n="signs.1">✔ Seu avô ou bisavô nasceu na Grécia</li>
+            <li data-i18n="signs.2">✔ Sua família tem sobrenome de origem grega</li>
+            <li data-i18n="signs.3">✔ Existe registro de imigração grega na família</li>
+            <li data-i18n="signs.4">✔ Alguém da família já teve passaporte grego</li>
+            <li data-i18n="signs.5">✔ Existe registro municipal (dimotologio) na Grécia</li>
+         </ul>
+         <p class="signs-subtitle" data-i18n="signs.subtitle">Se você se identifica com pelo menos 1 desses pontos, pode ter direito ao passaporte europeu.</p>
+         <p style="font-size:1rem;font-weight:600;color:var(--primary-color);margin-bottom:14px;" data-i18n="signs.cta">🔎 Descubra em 2 minutos</p>
+         <div class="app-links-group" style="justify-content:center;">
             <a href="https://apps.apple.com/app/id6759114726" target="_blank" rel="noopener noreferrer"
-               style="font-weight:bold;color:#FF6F00;text-decoration:underline;" data-i18n="ios.app.link">Download
-               our iOS App!</a>
-         </div>
-         <div style="margin-bottom:8px;">
-            <img src="icon.png" alt="Android App Icon"
-               style="width:32px;height:32px;margin-right:8px;vertical-align:middle;" />
-            <a href="https://play.google.com/store/apps/details?id=com.cidadaniagrega.greekcitizenship&pcampaignid=web_share"
-               target="_blank" rel="noopener noreferrer"
-               style="font-weight:bold;color:#FF6F00;text-decoration:underline;" data-i18n="android.app.link">Download
-               our Android App!</a>
-         </div>
-         <p class="hero-subtitle" data-i18n="hero.subtitle">
-            Orientação profissional completa para reconhecer sua cidadania grega por descendência. Evite erros comuns e
-            economize anos no processo.
-         </p>
-         <div class="hero-cta-container">
-            <a href="#consultation" class="hero-cta" data-i18n="hero.cta">🗓️ Agendar Consultoria Personalizada</a>
-         </div>
-         <div class="trust-indicators">
-            <div class="trust-item">
-               <div class="icon-badge">🎯</div>
-               <div>
-                  <strong data-i18n="trust.accuracy">100%</strong>
-                  <span data-i18n="trust.accuracy_desc">Análise de Elegibilidade</span>
-               </div>
-            </div>
-            <div class="trust-item">
-               <div class="icon-badge">⚡</div>
-               <div>
-                  <strong data-i18n="trust.speed">Rápido</strong>
-                  <span data-i18n="trust.speed_desc">Resultados em 1 Hora</span>
-               </div>
-            </div>
-            <div class="trust-item">
-               <div class="icon-badge">🏆</div>
-               <div>
-                  <strong data-i18n="trust.expert">Especialista</strong>
-                  <span data-i18n="trust.expert_desc">Consultoria Personalizada</span>
-               </div>
-            </div>
+               class="app-btn-ios">🍎 iOS App Store</a>
+            <a href="https://play.google.com/store/apps/details?id=com.cidadaniagrega.greekcitizenship&pcampaignid=web_share" target="_blank" rel="noopener noreferrer"
+               class="app-btn-android">🤖 Google Play</a>
          </div>
       </section>
 
@@ -870,9 +1537,7 @@
             requisitos:
          </p>
          <ul>
-            <li data-i18n="process.req_documents">📜 <strong>Documentos Oficiais Gregos:</strong> Você deve ter a
-               certidão de nascimento grega original do seu ancestral (ou registro consular). Sem este documento, não é
-               possível comprovar a origem grega.</li>
+            <li data-i18n="process.req_documents">📜 <strong>Documentos Oficiais Gregos:</strong> Para confirmar elegibilidade, você precisará de ao menos um dos seguintes documentos do seu ancestral grego:<br><ul style="margin:10px 0 10px 20px;"><li>Certificado do Registro Municipal (Dimotologio)</li><li>Registro Familiar (Oikogeneia)</li><li>Certidão de Nascimento Grega</li><li>Passaporte Grego</li></ul>💡 <strong>Para a triagem inicial:</strong> qualquer documento que possa indicar origem grega é bem-vindo — grego ou do seu país de origem (batismo, naturalização, cartas, etc.).</li>
             <li data-i18n="process.req_male_line">👨 <strong>Linha Masculina (Qualquer Época):</strong> Se seu
                ancestral grego for do sexo masculino (pai, avô, bisavô), a transmissão da cidadania é direta,
                independentemente da data de nascimento dos descendentes.</li>
@@ -981,52 +1646,78 @@
          </ul>
       </section>
 
-      <section class="info-section scroll-animate" id="consultation">
-         <h2 data-i18n="consultation.title">💬 Consultoria Personalizada de Cidadania Grega</h2>
-         <p data-i18n="consultation.description">
-            Oferecemos uma sessão de consultoria de <strong>1 hora</strong> para avaliar seu caso específico,
-            identificar os documentos necessários e fornecer orientações claras sobre o processo de cidadania grega.
-            Nossa consultoria é focada em oferecer o máximo de valor em uma única sessão produtiva.
-         <div style="margin-top:16px;">
-            <img src="icon.png" alt="iOS App Icon"
-               style="width:32px;height:32px;margin-right:8px;vertical-align:middle;" />
-            <a href="https://apps.apple.com/app/id6759114726" target="_blank" rel="noopener noreferrer"
-               style="font-weight:bold;color:#FF6F00;text-decoration:underline;" data-i18n="ios.app.link">Download
-               our iOS App!</a>
+      <section class="emotional-section scroll-animate">
+         <blockquote data-i18n="emotional.quote">"A cidadania grega não é um favor."</blockquote>
+         <p data-i18n="emotional.text">É um direito que pode estar na sua família há gerações. Mas milhares de descendentes nunca conseguem reconhecê-la por falta de orientação. Você não precisa ser um desses casos.</p>
+      </section>
+
+      <section class="final-cta-section scroll-animate" id="consultation">
+         <h2 data-i18n="finalcta.title">Comece agora</h2>
+         <p data-i18n="finalcta.intro">Cada dia que passa é um dia a menos para garantir seu passaporte europeu. Escolha como quer começar:</p>
+
+         <div class="final-cta-cards">
+
+            <!-- Triage card -->
+            <div class="final-cta-card triage">
+               <span class="final-cta-card-tag" data-i18n="finalcta.triage.tag">1h · Diagnóstico</span>
+               <h3 data-i18n="finalcta.triage.title">🇬🇷 Descubra Se Você Pode Obter a Cidadania Grega</h3>
+               <p data-i18n="finalcta.triage.desc">Sessão de diagnóstico com um especialista para analisar seu histórico familiar e descobrir se o seu caso tem potencial.</p>
+               <ul>
+                  <li data-i18n="finalcta.triage.feat1">🔍 Análise da sua linha de descendência</li>
+                  <li data-i18n="finalcta.triage.feat2">📄 Mapeamento dos documentos do ancestral grego</li>
+                  <li data-i18n="finalcta.triage.feat3">🗺️ Diagnóstico: elegível, caminho crítico ou inviável</li>
+                  <li data-i18n="finalcta.triage.feat4">📋 Próximos passos definidos com clareza</li>
+                  <li data-i18n="finalcta.triage.feat5">💬 Ideal para quem está começando ou teve resultado incerto</li>
+               </ul>
+               <div class="card-btns">
+                  <a href="https://calendly.com/cidadaniagrega/triagem-inicial" target="_blank" rel="noopener noreferrer"
+                     class="funnel-cta-yellow triage-br" data-i18n="finalcta.triage.btn.br">📅 Agendar triagem</a>
+                  <a href="https://calendly.com/cidadaniagrega/initial-triage" target="_blank" rel="noopener noreferrer"
+                     class="funnel-cta-yellow triage-other" data-i18n="finalcta.triage.btn.other" style="display:none;">📅 Schedule triage</a>
+               </div>
+            </div>
+
+            <!-- App Premium card -->
+            <div class="final-cta-card app">
+               <span class="final-cta-card-tag" data-i18n="finalcta.app.tag">📱 App Premium</span>
+               <h3 data-i18n="finalcta.app.title">Guia completo na palma da mão</h3>
+               <p data-i18n="finalcta.app.desc">O app analisa sua elegibilidade em minutos e te entrega um roteiro passo a passo — sem esperar atendimento. Mesmo conteúdo da consultoria, sempre disponível.</p>
+               <ul>
+                  <li data-i18n="finalcta.app.feat1">✅ Resultado de elegibilidade imediato</li>
+                  <li data-i18n="finalcta.app.feat2">✅ Lista de documentos necessários</li>
+                  <li data-i18n="finalcta.app.feat3">✅ Guia completo do processo</li>
+                  <li data-i18n="finalcta.app.feat4">✅ Disponível 24h, sem agendamento</li>
+               </ul>
+               <div class="card-btns">
+                  <a href="https://apps.apple.com/app/id6759114726" target="_blank" rel="noopener noreferrer"
+                     class="app-btn-ios">🍎 iOS App Store</a>
+                  <a href="https://play.google.com/store/apps/details?id=com.cidadaniagrega.greekcitizenship&pcampaignid=web_share" target="_blank" rel="noopener noreferrer"
+                     class="app-btn-android">🤖 Google Play</a>
+               </div>
+            </div>
+
+            <!-- Consultoria card -->
+            <div class="final-cta-card consult">
+               <span class="final-cta-card-tag" data-i18n="finalcta.consult.tag">👤 Acompanhamento Completo</span>
+               <h3 data-i18n="finalcta.consult.title">Do diagnóstico à cidadania</h3>
+               <p data-i18n="finalcta.consult.desc">Para quem já sabe que é elegível e quer suporte personalizado até o fim. Um especialista te guia em cada etapa com acompanhamento contínuo via WhatsApp.</p>
+               <ul>
+                  <li data-i18n="finalcta.consult.feat1">✅ Estratégia e plano personalizado</li>
+                  <li data-i18n="finalcta.consult.feat2">✅ Orientação em cada etapa do processo</li>
+                  <li data-i18n="finalcta.consult.feat3">✅ Acompanhamento contínuo via WhatsApp</li>
+                  <li data-i18n="finalcta.consult.feat4">✅ Suporte até a conclusão</li>
+               </ul>
+               <div class="card-btns">
+                  <a href="https://calendly.com/cidadaniagrega/passo-a-passo" target="_blank" rel="noopener noreferrer"
+                     class="btn calendly-pt" data-i18n="finalcta.btn2">📅 Agendar consultoria personalizada</a>
+                  <a href="https://calendly.com/cidadaniagrega/step-by-step" target="_blank" rel="noopener noreferrer"
+                     class="btn calendly-other" data-i18n="finalcta.btn2" style="display:none;">📅 Schedule Personalized Consultation</a>
+               </div>
+            </div>
+
          </div>
-         <div style="margin-top:8px;">
-            <img src="icon.png" alt="Android App Icon"
-               style="width:32px;height:32px;margin-right:8px;vertical-align:middle;" />
-            <a href="https://play.google.com/store/apps/details?id=com.cidadaniagrega.greekcitizenship&pcampaignid=web_share"
-               target="_blank" rel="noopener noreferrer"
-               style="font-weight:bold;color:#FF6F00;text-decoration:underline;" data-i18n="android.app.link">Download
-               our Android App!</a>
-         </div>
-         </p>
-         <p data-i18n="consultation.cta" style="margin-top: 20px; font-size: 1.1rem;">
-            <strong>Clique no botão abaixo para acessar nosso calendário e agendar sua sessão de consultoria
-               paga.</strong>
-         </p>
-         <div data-i18n="consultation.payment_info"
-            style="margin-top: 20px; padding: 20px; background: rgba(255, 111, 0, 0.08); border-radius: 10px; border-left: 4px solid var(--secondary-color);">
-            <p style="margin: 0; font-weight: 600; color: var(--secondary-color);">💳 Informações sobre Pagamento</p>
-            <p style="margin-top: 12px; font-size: 0.95rem; line-height: 1.7;">
-               Como nossa consultoria é <strong>global</strong>, todos os pagamentos são processados em <strong>dólares
-                  americanos (USD)</strong>.
-               Ao agendar sua sessão, o valor será automaticamente convertido para sua moeda local na maioria dos
-               países, usando a taxa de câmbio atual.</p>.
-            </p>
-         </div>
-         <div style="margin-top: 30px; text-align: center;">
-            <a href="https://calendly.com/cidadaniagrega/passo-a-passo" target="_blank" class="btn calendly-pt"
-               rel="noopener noreferrer" data-i18n="consultation.button" lang="pt">
-               Agendar Consultoria
-            </a>
-            <a href="https://calendly.com/cidadaniagrega/step-by-step" target="_blank" class="btn calendly-other"
-               rel="noopener noreferrer" data-i18n="consultation.button" lang="en" style="display:none;">
-               Schedule Consultation
-            </a>
-         </div>
+
+         <p class="final-cta-combine" data-i18n="finalcta.combine">💡 <strong>Dica:</strong> Muitos clientes combinam o app + consultoria — o app acompanha cada etapa enquanto a consultoria acelera e personaliza o caminho.</p>
       </section>
 
       <aside class="legal">
@@ -1485,7 +2176,7 @@ O objetivo deste projeto é simples: <b>clareza, orientação e autonomia</b>, p
             'process.qualify3': '🌳 <strong>Bisnetos e gerações seguintes:</strong> Também possível via <strong>retroatividade em cascata</strong> - cada geração pode reconhecer a cidadania retroativamente, transmitindo para a próxima. Quanto mais gerações, mais complexo o processo, mas é viável se todos os requisitos forem atendidos em cada etapa.',
             'process.critical_requirements': '⚠️ Requisitos Críticos de Elegibilidade',
             'process.critical_intro': 'Para ter direito à cidadania grega, é fundamental que você atenda a <strong>todos</strong> os seguintes requisitos:',
-            'process.req_documents': '📜 <strong>Documentos Oficiais Gregos para Triagem:</strong> Para iniciar a análise do seu caso, basta apresentar <strong>qualquer um</strong> dos seguintes documentos do seu ancestral grego:<br><ul style="margin:10px 0 10px 20px;"><li>Passaporte grego</li><li>Certidão de nascimento grega</li><li>Certidão de casamento</li><li>Certidão de batismo</li><li>Documento de naturalização</li></ul>👉 <strong>Qualquer um destes documentos é suficiente para iniciar a triagem inicial.</strong> Eles ajudam a identificar o ancestral na Grécia e dar andamento ao processo. Se não possui nenhum deles, será necessário buscar registros em arquivos gregos ou consulares.',
+            'process.req_documents': '📜 <strong>Documentos Oficiais Gregos:</strong> Para confirmar elegibilidade, você precisará de ao menos um dos seguintes documentos do seu ancestral grego:<br><ul style="margin:10px 0 10px 20px;"><li>Certificado do Registro Municipal (Dimotologio)</li><li>Registro Familiar (Oikogeneia)</li><li>Certidão de Nascimento Grega</li><li>Passaporte Grego</li></ul>💡 <strong>Para a triagem inicial:</strong> qualquer documento que possa indicar origem grega é bem-vindo — grego ou do seu país de origem (batismo, naturalização, cartas, etc.).',
             'process.req_male_line': '👨 <strong>Linha Masculina (Qualquer Época):</strong> Se seu ancestral grego for do sexo masculino (pai, avô, bisavô), a transmissão da cidadania é direta, independentemente da data de nascimento dos descendentes.',
             'process.req_female_line': '👩 <strong>Linha Feminina (Importante):</strong> Se seu ancestral grego for do sexo feminino (mãe, avó, bisavó), existem regras específicas:',
             'process.req_female_after1982': '✅ <strong>Filhos Nascidos Após 1982:</strong> A transmissão de cidadania por mãe grega é automática para filhos nascidos após esta data, independentemente do estado civil da mãe.',
@@ -1521,7 +2212,69 @@ O objetivo deste projeto é simples: <b>clareza, orientação e autonomia</b>, p
             'consultation.payment_info': '<p style="margin:0;font-weight:600;color:var(--secondary-color);">💳 Informações sobre Pagamento</p><p style="margin-top:12px;font-size:0.95rem;line-height:1.7;">Como nossa consultoria é <strong>global</strong>, todos os pagamentos são processados em <strong>dólares americanos (USD)</strong>. Ao agendar sua sessão, o valor será automaticamente convertido para sua moeda local na maioria dos países, usando a taxa de câmbio atual.</p>',
             'consultation.button': 'Agendar Consultoria',
             'legal.disclaimer': '<strong>Aviso:</strong> A Cidadania Grega é uma <strong>assessoria particular e independente</strong>. Prestamos orientação documental e preparo para procedimentos oficiais. <strong>Não</strong> representamos o Consulado ou o Governo Grego, nem temos qualquer vínculo com órgãos públicos. O reconhecimento da cidadania e a emissão de documentos dependem exclusivamente da análise e decisão das autoridades competentes.',
-            'footer.copyright': '© 2026 Assessoria Cidadania Grega - Consultoria Independente. Todos os direitos reservados'
+            'footer.copyright': '© 2026 Assessoria Cidadania Grega - Consultoria Independente. Todos os direitos reservados',
+            'hero.story.line': 'Sou neto de grego e conquistei a cidadania em menos de 1 ano — junto com meu pai e meus filhos.',
+            'funnel.title': 'Em que situação você está?',
+            'funnel.subtitle': 'Escolha o caminho certo para avançar',
+            'funnel.green.title': '🟢 Já tenho documento grego',
+            'funnel.green.desc': 'Você já possui algum destes documentos do seu ancestral:',
+            'funnel.green.doc1': 'Certificado do Registro Municipal (Dimotologio)',
+            'funnel.green.doc2': 'Registro Familiar (Oikogeneia)',
+            'funnel.green.doc3': 'Certidão de Nascimento Grega',
+            'funnel.green.doc4': 'Passaporte Grego',
+            'funnel.green.cta': '📅 Agendar análise do processo',
+            'funnel.yellow.title': '🟡 Não sei se tenho direito',
+            'funnel.yellow.desc': 'Você se identifica com estes pontos:',
+            'funnel.yellow.item1': 'Não sabe se há registro na Grécia',
+            'funnel.yellow.item2': 'Não tem documentos gregos em mãos',
+            'funnel.yellow.item3': 'Quer confirmar elegibilidade antes de avançar',
+            'funnel.yellow.cta': '🔎 Fazer teste de elegibilidade',
+            'funnel.yellow.triage.cta': '📅 Agendar triagem inicial',
+            'social.title': 'Resultados reais. Pessoas reais.',
+            'social.cases.number': '+200',
+            'social.cases.label': 'Casos analisados',
+            'social.countries.number': '12+',
+            'social.countries.label': 'Países atendidos',
+            'social.process.number': '<1 ano',
+            'social.process.label': 'Processo concluído',
+            'signs.title': '5 sinais de que você pode ter cidadania grega 🇬🇷',
+            'signs.1': '✔ Seu avô ou bisavô nasceu na Grécia',
+            'signs.2': '✔ Sua família tem sobrenome de origem grega',
+            'signs.3': '✔ Existe registro de imigração grega na família',
+            'signs.4': '✔ Alguém da família já teve passaporte grego',
+            'signs.5': '✔ Existe registro municipal (dimotologio) na Grécia',
+            'signs.subtitle': 'Se você se identifica com pelo menos 1 desses pontos, pode ter direito ao passaporte europeu.',
+            'signs.cta': '🔎 Descubra em 2 minutos',
+            'emotional.quote': '"A cidadania grega não é um favor."',
+            'emotional.text': 'É um direito que pode estar na sua família há gerações. Mas milhares de descendentes nunca conseguem reconhecê-la por falta de orientação. Você não precisa ser um desses casos.',
+            'finalcta.title': 'Comece agora',
+            'finalcta.intro': 'Cada dia que passa é um dia a menos para garantir seu passaporte europeu. Escolha como quer começar:',
+            'finalcta.triage.tag': '1h · Diagnóstico',
+            'finalcta.triage.title': '🇬🇷 Descubra Se Você Pode Obter a Cidadania Grega',
+            'finalcta.triage.desc': 'Sessão de diagnóstico com um especialista para analisar seu histórico familiar e descobrir se o seu caso tem potencial.',
+            'finalcta.triage.feat1': '🔍 Análise da sua linha de descendência',
+            'finalcta.triage.feat2': '📄 Mapeamento dos documentos do ancestral grego',
+            'finalcta.triage.feat3': '🗺️ Diagnóstico: elegível, caminho crítico ou inviável',
+            'finalcta.triage.feat4': '📋 Próximos passos definidos com clareza',
+            'finalcta.triage.feat5': '💬 Ideal para quem está começando ou teve resultado incerto',
+            'finalcta.triage.btn.br': '📅 Agendar triagem',
+            'finalcta.triage.btn.other': '📅 Schedule triage',
+            'finalcta.app.tag': '📱 App Premium',
+            'finalcta.app.title': 'Guia completo na palma da mão',
+            'finalcta.app.desc': 'O app analisa sua elegibilidade em minutos e te entrega um roteiro passo a passo — sem esperar atendimento. Mesmo conteúdo da consultoria, sempre disponível.',
+            'finalcta.app.feat1': '✅ Resultado de elegibilidade imediato',
+            'finalcta.app.feat2': '✅ Lista de documentos necessários',
+            'finalcta.app.feat3': '✅ Guia completo do processo',
+            'finalcta.app.feat4': '✅ Disponível 24h, sem agendamento',
+            'finalcta.consult.tag': '👤 Acompanhamento Completo',
+            'finalcta.consult.title': 'Do diagnóstico à cidadania',
+            'finalcta.consult.desc': 'Para quem já sabe que é elegível e quer suporte personalizado até o fim. Um especialista te guia em cada etapa com acompanhamento contínuo via WhatsApp.',
+            'finalcta.consult.feat1': '✅ Estratégia e plano personalizado',
+            'finalcta.consult.feat2': '✅ Orientação em cada etapa do processo',
+            'finalcta.consult.feat3': '✅ Acompanhamento contínuo via WhatsApp',
+            'finalcta.consult.feat4': '✅ Suporte até a conclusão',
+            'finalcta.btn2': '📅 Agendar consultoria personalizada',
+            'finalcta.combine': '💡 <strong>Dica:</strong> O app + acompanhamento é a combinação mais completa — o app te guia em cada etapa enquanto o especialista está disponível via WhatsApp para apoio contínuo.'
          },
          'en-US': {
             'android.app.link': 'Download our Android App!',
@@ -1577,7 +2330,7 @@ The goal of this project is simple: <b>clarity, guidance, and autonomy</b>, so t
             'process.qualify3': '🌳 <strong>Great-grandchildren and following generations:</strong> Also possible via <strong>cascading retroactivity</strong> - each generation can recognize citizenship retroactively, transmitting to the next. The more generations, the more complex the process, but it\'s viable if all requirements are met at each stage.',
             'process.critical_requirements': '⚠️ Critical Eligibility Requirements',
             'process.critical_intro': 'To qualify for Greek citizenship, it is essential that you meet <strong>all</strong> of the following requirements:',
-            'process.req_documents': '📜 <strong>Official Greek Documents for Screening:</strong> To start your case assessment, you only need to present <strong>any one</strong> of the following documents from your Greek ancestor:<br><ul style="margin:10px 0 10px 20px;"><li>Greek passport</li><li>Greek birth certificate</li><li>Marriage certificate</li><li>Baptism certificate</li><li>Naturalization document</li></ul>👉 <strong>Any of these documents is sufficient to begin the initial screening.</strong> They help identify the ancestor in Greece and move the process forward. If you do not have any of them, it will be necessary to search for records in Greek or consular archives.',
+            'process.req_documents': '📜 <strong>Official Greek Documents:</strong> To confirm eligibility, you will need at least one of the following documents from your Greek ancestor:<br><ul style="margin:10px 0 10px 20px;"><li>Municipal Registry Certificate (Dimotologio)</li><li>Family Registry (Oikogeneia)</li><li>Greek Birth Certificate</li><li>Greek Passport</li></ul>💡 <strong>For the initial triage:</strong> any document that may indicate Greek origin is welcome — Greek or from your home country (baptism records, naturalization docs, letters, etc.).',
             'process.req_male_line': '👨 <strong>Male Line (Any Era):</strong> If your Greek ancestor is male (father, grandfather, great-grandfather), citizenship transmission is direct, regardless of descendants\' birth dates.',
             'process.req_female_line': '👩 <strong>Female Line (Important):</strong> If your Greek ancestor is female (mother, grandmother, great-grandmother), specific rules apply:',
             'process.req_female_after1982': '✅ <strong>Children Born After 1982:</strong> Citizenship transmission through a Greek mother is automatic for children born after this date, regardless of the mother\'s marital status.',
@@ -1618,7 +2371,69 @@ The goal of this project is simple: <b>clarity, guidance, and autonomy</b>, so t
             'consultation.payment_info': '<p style="margin:0;font-weight:600;color:var(--secondary-color);">💳 Payment Information</p><p style="margin-top:12px;font-size:0.95rem;line-height:1.7;">As our consultancy is <strong>global</strong>, all payments are processed in <strong>US Dollars (USD)</strong>. When scheduling your session, the amount will be automatically converted to your local currency in most countries using the current exchange rate.</p>',
             'consultation.button': 'Schedule Consultation',
             'legal.disclaimer': '<strong>Notice:</strong> Greek Citizenship is a <strong>private and independent advisory service</strong>. We provide documentary guidance and preparation for official procedures. We <strong>do not</strong> represent the Consulate or the Greek Government, nor do we have any affiliation with public bodies. Recognition of citizenship and issuance of documents depend exclusively on the analysis and decision of competent authorities.',
-            'footer.copyright': '© 2026 Greek Citizenship Advisory - Independent Consultation. All rights reserved'
+            'footer.copyright': '© 2026 Greek Citizenship Advisory - Independent Consultation. All rights reserved',
+            'hero.story.line': 'I am a Greek grandson who achieved citizenship in under a year — along with my father and my children.',
+            'funnel.title': 'What is your situation?',
+            'funnel.subtitle': 'Choose the right path to move forward',
+            'funnel.green.title': '🟢 I already have a Greek document',
+            'funnel.green.desc': 'You already have one of these documents from your ancestor:',
+            'funnel.green.doc1': 'Municipal Registry Certificate (Dimotologio)',
+            'funnel.green.doc2': 'Family Registry (Oikogeneia)',
+            'funnel.green.doc3': 'Greek Birth Certificate',
+            'funnel.green.doc4': 'Greek Passport',
+            'funnel.green.cta': '📅 Schedule process analysis',
+            'funnel.yellow.title': '🟡 I\'m not sure if I qualify',
+            'funnel.yellow.desc': 'You identify with these points:',
+            'funnel.yellow.item1': 'Don\'t know if there\'s a record in Greece',
+            'funnel.yellow.item2': 'Don\'t have Greek documents on hand',
+            'funnel.yellow.item3': 'Want to confirm eligibility before moving forward',
+            'funnel.yellow.cta': '🔎 Take eligibility test',
+            'funnel.yellow.triage.cta': '📅 Schedule initial triage',
+            'social.title': 'Real results. Real people.',
+            'social.cases.number': '+200',
+            'social.cases.label': 'Cases analyzed',
+            'social.countries.number': '12+',
+            'social.countries.label': 'Countries served',
+            'social.process.number': '<1 year',
+            'social.process.label': 'Process completed',
+            'signs.title': '5 signs you may have Greek citizenship 🇬🇷',
+            'signs.1': '✔ Your grandfather or great-grandfather was born in Greece',
+            'signs.2': '✔ Your family has a Greek-origin surname',
+            'signs.3': '✔ There is a record of Greek immigration in your family',
+            'signs.4': '✔ Someone in your family had a Greek passport',
+            'signs.5': '✔ There is a municipal record (dimotologio) in Greece',
+            'signs.subtitle': 'If you identify with at least 1 of these points, you may have the right to a European passport.',
+            'signs.cta': '🔎 Find out in 2 minutes',
+            'emotional.quote': '"Greek citizenship is not a favor."',
+            'emotional.text': 'It is a right that may have existed in your family for generations. But thousands of descendants never manage to recognize it due to lack of guidance. You don\'t have to be one of those cases.',
+            'finalcta.title': 'Start now',
+            'finalcta.intro': 'Every day that passes is one less day to secure your European passport. Choose how you want to begin:',
+            'finalcta.triage.tag': '1h · Diagnosis',
+            'finalcta.triage.title': '🇬🇷 Find Out If You Can Obtain Greek Citizenship',
+            'finalcta.triage.desc': 'A diagnostic session with a specialist to assess your family history and find out if your case has potential.',
+            'finalcta.triage.feat1': '🔍 Analysis of your line of descent',
+            'finalcta.triage.feat2': '📄 Mapping of your Greek ancestor\'s documents',
+            'finalcta.triage.feat3': '🗺️ Diagnosis: eligible, critical path, or not viable',
+            'finalcta.triage.feat4': '📋 Next steps defined with clarity',
+            'finalcta.triage.feat5': '💬 Ideal if you\'re just starting or got an uncertain result',
+            'finalcta.triage.btn.br': '📅 Agendar triagem',
+            'finalcta.triage.btn.other': '📅 Schedule triage',
+            'finalcta.app.tag': '📱 Premium App',
+            'finalcta.app.title': 'Your complete guide, always in your pocket',
+            'finalcta.app.desc': 'The app assesses your eligibility in minutes and delivers a step-by-step roadmap — no waiting, no scheduling. Same content as a consultation, always available.',
+            'finalcta.app.feat1': '✅ Immediate eligibility result',
+            'finalcta.app.feat2': '✅ Required documents listed',
+            'finalcta.app.feat3': '✅ Full process guide',
+            'finalcta.app.feat4': '✅ Available 24/7, no booking needed',
+            'finalcta.consult.tag': '👤 Full Accompaniment',
+            'finalcta.consult.title': 'From diagnosis to citizenship',
+            'finalcta.consult.desc': 'For those who already know they\'re eligible and want personalized support to the end. A specialist guides you through every step with continuous WhatsApp follow-up.',
+            'finalcta.consult.feat1': '✅ Personalized strategy and plan',
+            'finalcta.consult.feat2': '✅ Guidance at every step of the process',
+            'finalcta.consult.feat3': '✅ Continuous WhatsApp follow-up',
+            'finalcta.consult.feat4': '✅ Support until completion',
+            'finalcta.btn2': '📅 Schedule personalized consultation',
+            'finalcta.combine': '💡 <strong>Pro tip:</strong> App + accompaniment is the most complete combination — the app guides each step while the specialist is available on WhatsApp for ongoing support.'
          },
          'fr-FR': {
             'android.app.link': 'Téléchargez notre application Android!',
@@ -1669,7 +2484,7 @@ L'objectif de ce projet est simple : <b>clarté, orientation et autonomie</b>, a
             'process.qualify3': '🌳 <strong>Arrière-petits-enfants et générations suivantes :</strong> Également possible via la <strong>rétroactivité en cascade</strong> - chaque génération peut reconnaître la citoyenneté rétroactivement, la transmettant à la suivante. Plus il y a de générations, plus le processus est complexe, mais il est réalisable si toutes les exigences sont remplies à chaque étape.',
             'process.critical_requirements': '⚠️ Exigences critiques d’éligibilité',
             'process.critical_intro': 'Pour prétendre à la citoyenneté grecque, il est essentiel de remplir <strong>toutes</strong> les exigences suivantes :',
-            'process.req_documents': '📜 <strong>Documents officiels grecs pour le filtrage :</strong> Pour commencer l\'évaluation de votre dossier, il suffit de présenter <strong>l\'un</strong> des documents suivants de votre ancêtre grec :<br><ul style="margin:10px 0 10px 20px;"><li>Passeport grec</li><li>Acte de naissance grec</li><li>Acte de mariage</li><li>Acte de baptême</li><li>Document de naturalisation</li></ul>👉 <strong>Chacun de ces documents suffit pour démarrer le filtrage initial.</strong> Ils permettent d\'identifier l\'ancêtre en Grèce et d\'avancer dans la procédure. Si vous n\'en possédez aucun, il sera nécessaire de rechercher des archives grecques ou consulaires.',
+            'process.req_documents': '📜 <strong>Documents officiels grecs :</strong> Pour confirmer l\'éligibilité, vous aurez besoin d\'au moins l\'un des documents suivants de votre ancêtre grec :<br><ul style="margin:10px 0 10px 20px;"><li>Certificat du Registre Municipal (Dimotologio)</li><li>Registre Familial (Oikogeneia)</li><li>Acte de naissance grec</li><li>Passeport grec</li></ul>💡 <strong>Pour le triage initial :</strong> tout document pouvant indiquer une origine grecque est bienvenu — grec ou de votre pays d\'origine (acte de baptême, naturalisation, courriers, etc.).',
             'process.req_male_line': '👨 <strong>Ligne masculine (toute époque) :</strong> Si votre ancêtre grec est un homme (père, grand-père, arrière-grand-père), la transmission de la citoyenneté est directe, quelle que soit la date de naissance des descendants.',
             'process.req_female_line': '👩 <strong>Ligne féminine (important) :</strong> Si votre ancêtre grec est une femme (mère, grand-mère, arrière-grand-mère), des règles spécifiques s’appliquent :',
             'process.req_female_after1982': '✅ <strong>Enfants nés après 1982 :</strong> La transmission de la citoyenneté par une mère grecque est automatique pour les enfants nés après cette date, quel que soit le statut marital de la mère.',
@@ -1710,7 +2525,69 @@ L'objectif de ce projet est simple : <b>clarté, orientation et autonomie</b>, a
             'consultation.payment_info': '<p style="margin:0;font-weight:600;color:var(--secondary-color);">💳 Informations de Paiement</p><p style="margin-top:12px;font-size:0.95rem;line-height:1.7;">Comme notre cabinet de conseil est <strong>mondial</strong>, tous les paiements sont traités en <strong>dollars américains (USD)</strong>. Lors de la planification de votre session, le montant sera automatiquement converti dans votre devise locale dans la plupart des pays en utilisant le taux de change actuel.</p>',
             'consultation.button': 'Planifier la consultation',
             'legal.disclaimer': '<strong>Avertissement :</strong> La citoyenneté grecque est un <strong>service de conseil privé et indépendant</strong>. Nous fournissons des conseils documentaires et la préparation aux procédures officielles. Nous <strong>ne</strong> représentons pas le consulat ou le gouvernement grec, et n’avons aucun lien avec des organismes publics. La reconnaissance de la citoyenneté et la délivrance des documents dépendent exclusivement de l’analyse et de la décision des autorités compétentes.',
-            'footer.copyright': '© 2026 Conseil citoyenneté grecque - Consultation indépendante. Tous droits réservés'
+            'footer.copyright': '© 2026 Conseil citoyenneté grecque - Consultation indépendante. Tous droits réservés',
+            'hero.story.line': 'Petit-fils de Grec, j\'ai obtenu la citoyenneté en moins d\'un an — avec mon père et mes enfants.',
+            'funnel.title': 'Dans quelle situation êtes-vous ?',
+            'funnel.subtitle': 'Choisissez le bon chemin pour avancer',
+            'funnel.green.title': '🟢 J\'ai déjà un document grec',
+            'funnel.green.desc': 'Vous possédez déjà l\'un de ces documents de votre ancêtre :',
+            'funnel.green.doc1': 'Certificat du Registre Municipal (Dimotologio)',
+            'funnel.green.doc2': 'Registre Familial (Oikogeneia)',
+            'funnel.green.doc3': 'Acte de Naissance Grec',
+            'funnel.green.doc4': 'Passeport Grec',
+            'funnel.green.cta': '📅 Planifier l\'analyse du processus',
+            'funnel.yellow.title': '🟡 Je ne suis pas sûr d\'être éligible',
+            'funnel.yellow.desc': 'Vous vous reconnaissez dans ces points :',
+            'funnel.yellow.item1': 'Vous ne savez pas s\'il y a un registre en Grèce',
+            'funnel.yellow.item2': 'Vous n\'avez pas de documents grecs en main',
+            'funnel.yellow.item3': 'Vous souhaitez confirmer l\'éligibilité avant d\'avancer',
+            'funnel.yellow.cta': '🔎 Faire le test d\'éligibilité',
+            'funnel.yellow.triage.cta': '📅 Planifier le triage initial',
+            'social.title': 'Résultats réels. Personnes réelles.',
+            'social.cases.number': '+200',
+            'social.cases.label': 'Cas analysés',
+            'social.countries.number': '12+',
+            'social.countries.label': 'Pays servis',
+            'social.process.number': '<1 an',
+            'social.process.label': 'Processus finalisé',
+            'signs.title': '5 signes indiquant que vous pourriez avoir la citoyenneté grecque 🇬🇷',
+            'signs.1': '✔ Votre grand-père ou arrière-grand-père est né en Grèce',
+            'signs.2': '✔ Votre famille porte un nom d\'origine grecque',
+            'signs.3': '✔ Il existe un registre d\'immigration grecque dans votre famille',
+            'signs.4': '✔ Quelqu\'un dans votre famille a eu un passeport grec',
+            'signs.5': '✔ Il existe un registre municipal (dimotologio) en Grèce',
+            'signs.subtitle': 'Si vous vous identifiez à au moins 1 de ces points, vous pourriez avoir droit au passeport européen.',
+            'signs.cta': '🔎 Découvrez en 2 minutes',
+            'emotional.quote': '"La citoyenneté grecque n\'est pas une faveur."',
+            'emotional.text': 'C\'est un droit qui peut exister dans votre famille depuis des générations. Mais des milliers de descendants n\'arrivent jamais à la faire reconnaître par manque d\'orientation. Vous n\'avez pas à en faire partie.',
+            'finalcta.title': 'Commencez maintenant',
+            'finalcta.intro': 'Chaque jour qui passe est un jour de moins pour obtenir votre passeport européen. Choisissez comment commencer :',
+            'finalcta.triage.tag': '1h · Diagnostic',
+            'finalcta.triage.title': '🇬🇷 Découvrez si vous pouvez obtenir la citoyenneté grecque',
+            'finalcta.triage.desc': 'Une session de diagnostic avec un spécialiste pour analyser votre historique familial et découvrir si votre dossier a du potentiel.',
+            'finalcta.triage.feat1': '🔍 Analyse de votre ligne de descendance',
+            'finalcta.triage.feat2': '📄 Cartographie des documents de votre ancêtre grec',
+            'finalcta.triage.feat3': '🗺️ Diagnostic : éligible, parcours critique ou non viable',
+            'finalcta.triage.feat4': '📋 Prochaines étapes définies clairement',
+            'finalcta.triage.feat5': '💬 Idéal si vous débutez ou avez eu un résultat incertain',
+            'finalcta.triage.btn.br': '📅 Agendar triagem',
+            'finalcta.triage.btn.other': '📅 Planifier un triage',
+            'finalcta.app.tag': '📱 App Premium',
+            'finalcta.app.title': 'Guide complet dans votre poche',
+            'finalcta.app.desc': 'L\'application évalue votre éligibilité en quelques minutes et vous fournit une feuille de route étape par étape — sans attendre. Même contenu qu\'une consultation, toujours disponible.',
+            'finalcta.app.feat1': '✅ Résultat d\'éligibilité immédiat',
+            'finalcta.app.feat2': '✅ Liste des documents requis',
+            'finalcta.app.feat3': '✅ Guide complet du processus',
+            'finalcta.app.feat4': '✅ Disponible 24h/24, sans rendez-vous',
+            'finalcta.consult.tag': '👤 Accompagnement Complet',
+            'finalcta.consult.title': 'Du diagnostic à la citoyenneté',
+            'finalcta.consult.desc': 'Pour ceux qui savent déjà qu\'ils sont éligibles et souhaitent un soutien personnalisé jusqu\'au bout. Un spécialiste vous guide à chaque étape avec un suivi continu via WhatsApp.',
+            'finalcta.consult.feat1': '✅ Stratégie et plan personnalisés',
+            'finalcta.consult.feat2': '✅ Orientation à chaque étape du processus',
+            'finalcta.consult.feat3': '✅ Suivi continu via WhatsApp',
+            'finalcta.consult.feat4': '✅ Accompagnement jusqu\'à la conclusion',
+            'finalcta.btn2': '📅 Planifier une consultation personnalisée',
+            'finalcta.combine': '💡 <strong>Conseil :</strong> App + accompagnement est la combinaison la plus complète — l\'app guide chaque étape tandis que le spécialiste est disponible sur WhatsApp pour un soutien continu.'
          },
          'es-ES': {
             'android.app.link': 'Descarga nuestra aplicación Android!',
@@ -1761,8 +2638,7 @@ El objetivo de este proyecto es simple: <b>claridad, orientación y autonomía</
             'process.qualify3': '🌳 <strong>Bisnietos y generaciones siguientes:</strong> También posible mediante <strong>retroactividad en cascada</strong> - cada generación puede reconocer la ciudadanía retroactivamente, transmitiéndola a la siguiente. Cuantas más generaciones, más complejo el proceso, pero es viable si se cumplen todos los requisitos en cada etapa.',
             'process.critical_requirements': '⚠️ Requisitos críticos de elegibilidad',
             'process.critical_intro': 'Para tener derecho a la ciudadanía griega, es fundamental cumplir <strong>todos</strong> los siguientes requisitos:',
-            'process.req_documents': '📜 <strong>Documentos oficiales griegos:</strong> Debes tener el acta de nacimiento griega original de tu ancestro (o registro consular). Sin este documento, no es posible probar el origen griego.',
-            'process.req_documents': '📜 <strong>Documentos oficiales griegos para preselección:</strong> Para iniciar el análisis de tu caso, basta con presentar <strong>cualquiera</strong> de los siguientes documentos de tu ancestro griego:<br><ul style="margin:10px 0 10px 20px;"><li>Pasaporte griego</li><li>Acta de nacimiento griega</li><li>Acta de matrimonio</li><li>Acta de bautismo</li><li>Documento de naturalización</li></ul>👉 <strong>Cualquiera de estos documentos es suficiente para iniciar la preselección inicial.</strong> Ayudan a identificar al ancestro en Grecia y avanzar en el proceso. Si no tienes ninguno de ellos, será necesario buscar registros en archivos griegos o consulares.',
+            'process.req_documents': '📜 <strong>Documentos oficiales griegos:</strong> Para confirmar la elegibilidad, necesitarás al menos uno de los siguientes documentos de tu ancestro griego:<br><ul style="margin:10px 0 10px 20px;"><li>Certificado del Registro Municipal (Dimotologio)</li><li>Registro Familiar (Oikogeneia)</li><li>Partida de nacimiento griega</li><li>Pasaporte griego</li></ul>💡 <strong>Para el triaje inicial:</strong> cualquier documento que pueda indicar origen griego es bienvenido — griego o de tu país de origen (bautismo, naturalización, cartas, etc.).',
             'process.req_male_line': '👨 <strong>Línea masculina (cualquier época):</strong> Si tu ancestro griego es hombre (padre, abuelo, bisabuelo), la transmisión de la ciudadanía es directa, sin importar la fecha de nacimiento de los descendientes.',
             'process.req_female_line': '👩 <strong>Línea femenina (importante):</strong> Si tu ancestro griego es mujer (madre, abuela, bisabuela), existen reglas específicas:',
             'process.req_female_after1982': '✅ <strong>Hijos nacidos después de 1982:</strong> La transmisión de la ciudadanía por madre griega es automática para hijos nacidos después de esta fecha, sin importar el estado civil de la madre.',
@@ -1803,7 +2679,69 @@ El objetivo de este proyecto es simple: <b>claridad, orientación y autonomía</
             'consultation.payment_info': '<p style="margin:0;font-weight:600;color:var(--secondary-color);">💳 Información de Pago</p><p style="margin-top:12px;font-size:0.95rem;line-height:1.7;">Dado que nuestra consultoría es <strong>global</strong>, todos los pagos se procesan en <strong>dólares estadounidenses (USD)</strong>. Al programar su sesión, el monto se convertirá automáticamente a su moneda local en la mayoría de los países utilizando la tasa de cambio actual.</p>',
             'consultation.button': 'Agendar consulta',
             'legal.disclaimer': '<strong>Aviso:</strong> La ciudadanía griega es una <strong>asesoría privada e independiente</strong>. Brindamos orientación documental y preparación para procedimientos oficiales. <strong>No</strong> representamos al Consulado ni al Gobierno griego, ni tenemos ningún vínculo con organismos públicos. El reconocimiento de la ciudadanía y la emisión de documentos dependen exclusivamente del análisis y decisión de las autoridades competentes.',
-            'footer.copyright': '© 2026 Asesoría Ciudadanía Griega - Consulta independiente. Todos los derechos reservados'
+            'footer.copyright': '© 2026 Asesoría Ciudadanía Griega - Consulta independiente. Todos los derechos reservados',
+            'hero.story.line': 'Soy nieto de griego y obtuve la ciudadanía en menos de 1 año — junto con mi padre y mis hijos.',
+            'funnel.title': '¿En qué situación estás?',
+            'funnel.subtitle': 'Elige el camino correcto para avanzar',
+            'funnel.green.title': '🟢 Ya tengo un documento griego',
+            'funnel.green.desc': 'Ya tienes alguno de estos documentos de tu ancestro:',
+            'funnel.green.doc1': 'Certificado del Registro Municipal (Dimotologio)',
+            'funnel.green.doc2': 'Registro Familiar (Oikogeneia)',
+            'funnel.green.doc3': 'Acta de Nacimiento Griega',
+            'funnel.green.doc4': 'Pasaporte Griego',
+            'funnel.green.cta': '📅 Agendar análisis del proceso',
+            'funnel.yellow.title': '🟡 No sé si tengo derecho',
+            'funnel.yellow.desc': 'Te identificas con estos puntos:',
+            'funnel.yellow.item1': 'No sabes si hay registro en Grecia',
+            'funnel.yellow.item2': 'No tienes documentos griegos a mano',
+            'funnel.yellow.item3': 'Quieres confirmar elegibilidad antes de avanzar',
+            'funnel.yellow.cta': '🔎 Hacer prueba de elegibilidad',
+            'funnel.yellow.triage.cta': '📅 Agendar triaje inicial',
+            'social.title': 'Resultados reales. Personas reales.',
+            'social.cases.number': '+200',
+            'social.cases.label': 'Casos analizados',
+            'social.countries.number': '12+',
+            'social.countries.label': 'Países atendidos',
+            'social.process.number': '<1 año',
+            'social.process.label': 'Proceso completado',
+            'signs.title': '5 señales de que puedes tener ciudadanía griega 🇬🇷',
+            'signs.1': '✔ Tu abuelo o bisabuelo nació en Grecia',
+            'signs.2': '✔ Tu familia tiene un apellido de origen griego',
+            'signs.3': '✔ Existe un registro de inmigración griega en tu familia',
+            'signs.4': '✔ Alguien en tu familia tuvo pasaporte griego',
+            'signs.5': '✔ Existe un registro municipal (dimotologio) en Grecia',
+            'signs.subtitle': 'Si te identificas con al menos 1 de estos puntos, es posible que tengas derecho al pasaporte europeo.',
+            'signs.cta': '🔎 Descúbrelo en 2 minutos',
+            'emotional.quote': '"La ciudadanía griega no es un favor."',
+            'emotional.text': 'Es un derecho que puede existir en tu familia desde hace generaciones. Pero miles de descendientes nunca logran reconocerla por falta de orientación. No tienes que ser uno de esos casos.',
+            'finalcta.title': 'Comienza ahora',
+            'finalcta.intro': 'Cada día que pasa es un día menos para asegurar tu pasaporte europeo. Elige cómo quieres empezar:',
+            'finalcta.triage.tag': '1h · Diagnóstico',
+            'finalcta.triage.title': '🇬🇷 Descubre Si Puedes Obtener la Ciudadanía Griega',
+            'finalcta.triage.desc': 'Una sesión de diagnóstico con un especialista para analizar tu historial familiar y descubrir si tu caso tiene potencial.',
+            'finalcta.triage.feat1': '🔍 Análisis de tu línea de descendencia',
+            'finalcta.triage.feat2': '📄 Mapeo de documentos de tu ancestro griego',
+            'finalcta.triage.feat3': '🗺️ Diagnóstico: elegible, camino crítico o inviable',
+            'finalcta.triage.feat4': '📋 Próximos pasos definidos con claridad',
+            'finalcta.triage.feat5': '💬 Ideal si estás empezando o tuviste un resultado incierto',
+            'finalcta.triage.btn.br': '📅 Agendar triagem',
+            'finalcta.triage.btn.other': '📅 Programar triaje',
+            'finalcta.app.tag': '📱 App Premium',
+            'finalcta.app.title': 'Guía completa en tu bolsillo',
+            'finalcta.app.desc': 'La app analiza tu elegibilidad en minutos y te entrega una hoja de ruta paso a paso — sin esperar atención. El mismo contenido que una consultoría, siempre disponible.',
+            'finalcta.app.feat1': '✅ Resultado de elegibilidad inmediato',
+            'finalcta.app.feat2': '✅ Lista de documentos necesarios',
+            'finalcta.app.feat3': '✅ Guía completa del proceso',
+            'finalcta.app.feat4': '✅ Disponible 24h, sin cita previa',
+            'finalcta.consult.tag': '👤 Acompañamiento Completo',
+            'finalcta.consult.title': 'Del diagnóstico a la ciudadanía',
+            'finalcta.consult.desc': 'Para quienes ya saben que son elegibles y quieren apoyo personalizado hasta el final. Un especialista te guía en cada etapa con seguimiento continuo vía WhatsApp.',
+            'finalcta.consult.feat1': '✅ Estrategia y plan personalizado',
+            'finalcta.consult.feat2': '✅ Orientación en cada etapa del proceso',
+            'finalcta.consult.feat3': '✅ Seguimiento continuo vía WhatsApp',
+            'finalcta.consult.feat4': '✅ Apoyo hasta la conclusión',
+            'finalcta.btn2': '📅 Agendar consulta personalizada',
+            'finalcta.combine': '💡 <strong>Consejo:</strong> App + acompañamiento es la combinación más completa — la app guía cada etapa mientras el especialista está disponible en WhatsApp para apoyo continuo.'
          },
          'page.title': 'Greek Citizenship - Expert Advisory',
          'header.title': 'Greek Citizenship for Descendants',
@@ -1946,6 +2884,21 @@ El objetivo de este proyecto es simple: <b>claridad, orientación y autonomía</
          return 'en-US'; // Default to English
       }
 
+      // Header scroll shadow
+      window.addEventListener('scroll', () => {
+         const h = document.getElementById('site-header');
+         if (h) h.classList.toggle('scrolled', window.scrollY > 10);
+      });
+
+      function toggleTriageDetails(btn) {
+         var d = btn.nextElementSibling;
+         var spans = btn.querySelectorAll('span');
+         var isOpen = d.style.display === 'block';
+         d.style.display = isOpen ? 'none' : 'block';
+         spans[0].style.display = isOpen ? '' : 'none';
+         spans[1].style.display = isOpen ? 'none' : '';
+      }
+
       // Detect user's country and update price/link accordingly
       async function detectCountryAndUpdatePricing() {
          try {
@@ -1975,6 +2928,10 @@ El objetivo de este proyecto es simple: <b>claridad, orientación y autonomía</
          if (calendlyButton) {
             calendlyButton.href = calendlyLink;
          }
+
+         // Show/hide triage Calendly buttons by country
+         document.querySelectorAll('.triage-br').forEach(el => el.style.display = isBrazil ? 'inline-flex' : 'none');
+         document.querySelectorAll('.triage-other').forEach(el => el.style.display = isBrazil ? 'none' : 'inline-flex');
 
          // Store for future use
          localStorage.setItem('userCountry', countryCode);
